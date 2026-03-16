@@ -279,7 +279,7 @@ export default function Testimonials() {
   }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-12 bg-white relative overflow-hidden text-gray-900">
       {/* Minimal Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-20 h-96 bg-gray-100 rounded-full filter blur-3xl opacity-20"></div>
@@ -348,8 +348,8 @@ export default function Testimonials() {
                           <Star
                             key={i}
                             className={`w-4 h-4 ${i < testimonial.rating
-                                ? 'text-gray-800 fill-gray-800'
-                                : 'text-gray-200 fill-gray-200'
+                              ? 'text-gray-800 fill-gray-800'
+                              : 'text-gray-200 fill-gray-200'
                               }`}
                           />
                         ))}

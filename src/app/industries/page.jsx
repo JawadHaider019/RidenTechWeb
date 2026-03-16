@@ -231,14 +231,6 @@ export default function IndustriesPage() {
 
   const handleMouseLeave = (index) => {
     // Don't reset immediately - we'll let the next hover handle it
-    // But if we want to reset when mouse leaves completely, uncomment below
-    /*
-    if (hoverTl.current[index]) {
-      hoverTl.current[index].kill();
-    }
-    resetAllCards();
-    setActiveHoverIndex(null);
-    */
   };
 
   useEffect(() => {
@@ -275,16 +267,15 @@ export default function IndustriesPage() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <HeroSection
-        title="INDUSTRIES WE SERVE"
+        title="Industry Expertise"
         subtitle="Deep domain expertise across sectors delivering tailored solutions for your unique challenges"
-        imageSrc="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop"
         overlayColor="bg-white"
       />
 
       {/* Industries List - Responsive */}
-      <section ref={sectionRef} className="-mt-16 pb-24  px-4 md:px-6 lg:px-8">
+      <section ref={sectionRef} className="-mt-16 pb-24 px-4 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col gap-6 md:gap-8 lg:gap-10">
+          <div className="flex flex-col gap-4 md:gap-5 lg:gap-6">
             {industries.map((industry, index) => {
               const isEven = index % 2 === 0;
 
@@ -292,7 +283,7 @@ export default function IndustriesPage() {
                 <div
                   key={industry.id}
                   ref={el => itemsRef.current[index] = el}
-                  className={`group relative bg-white rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg border border-gray-200 cursor-pointer transition-all duration-300 ${activeHoverIndex === index ? 'z-10' : 'z-0'
+                  className={`group relative bg-white rounded-xl md:rounded-2xl lg:rounded-3xl overflow-hidden shadow-md border border-gray-200 cursor-pointer transition-all duration-300 ${activeHoverIndex === index ? 'z-10 shadow-xl' : 'z-0'
                     }`}
                   onClick={() => window.location.href = `/industries/${industry.slug}`}
                   onMouseEnter={() => handleMouseEnter(index)}
@@ -301,8 +292,8 @@ export default function IndustriesPage() {
                   {/* Mobile: Stacked layout always */}
                   {/* Desktop: Alternating layout */}
                   <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
-                    {/* Image Side - Responsive height */}
-                    <div className="relative w-full lg:w-1/2 h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[450px] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                    {/* Image Side - Reduced height */}
+                    <div className="relative w-full lg:w-5/12 h-[200px] sm:h-[220px] md:h-[250px] lg:h-[280px] xl:h-[300px] overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                       <Image
                         src={getImageSource(industry)}
                         alt={industry.title}
@@ -317,44 +308,41 @@ export default function IndustriesPage() {
                       <div className={`absolute inset-0 bg-gradient-to-r ${industry.color} opacity-60 mix-blend-multiply`}></div>
 
                       {/* Number Badge - Responsive sizing */}
-                      <div className={`industry-number absolute bottom-3 md:bottom-4 lg:bottom-6 ${isEven ? 'right-3 md:right-4 lg:right-6' : 'left-3 md:left-4 lg:left-6'}`}>
-                        <span className="text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-marcellus font-black text-white/20">
+                      <div className={`industry-number absolute bottom-2 md:bottom-3 ${isEven ? 'right-2 md:right-3' : 'left-2 md:left-3'}`}>
+                        <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-marcellus font-black text-white/20">
                           {industry.number}
                         </span>
                       </div>
 
                       {/* Icon - Responsive positioning and size */}
-                      <div className={`industry-icon absolute top-3 md:top-4 lg:top-6 ${isEven ? 'right-3 md:right-4 lg:right-6' : 'left-3 md:left-4 lg:left-6'} bg-black/30 backdrop-blur-sm p-2 md:p-2.5 lg:p-3 rounded-lg md:rounded-xl text-white border border-white/20`}>
-                        <div className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7">
+                      <div className={`industry-icon absolute top-2 md:top-3 ${isEven ? 'right-2 md:right-3' : 'left-2 md:left-3'} bg-black/30 backdrop-blur-sm p-1.5 md:p-2 rounded-lg text-white border border-white/20`}>
+                        <div className="w-4 h-4 md:w-5 md:h-5">
                           {industry.icon}
                         </div>
                       </div>
                     </div>
 
-                    {/* Content Side - Responsive padding */}
-                    <div className="card-content w-full lg:w-1/2 p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 flex flex-col justify-center bg-white">
+                    {/* Content Side - Reduced padding */}
+                    <div className="card-content w-full lg:w-7/12 p-4 sm:p-5 md:p-6 lg:p-7 xl:p-8 flex flex-col justify-center bg-white">
                       {/* Title - Responsive font sizes */}
-                      <h3 className="industry-title font-marcellus text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-900 mb-3 md:mb-4">
+                      <h3 className="industry-title font-marcellus text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-900 mb-2">
                         {industry.title}
                       </h3>
 
                       {/* Description - Responsive text */}
-                      <p className="industry-description font-instrument text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
+                      <p className="industry-description font-instrument text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed mb-3">
                         {industry.description}
                       </p>
 
                       {/* Divider */}
-                      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-4 md:mb-6" />
+                      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-3" />
 
                       {/* Learn More Link - Responsive */}
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
-                        <span className="text-xs sm:text-sm text-gray-500 font-manrope order-2 sm:order-1">
-                          Click to learn more
-                        </span>
-                        <div className="explore-button flex items-center gap-2  font-semibold text-xs sm:text-sm bg-gray-900 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full order-1 sm:order-2">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                        <div className="explore-button flex items-center gap-2 font-semibold text-xs bg-gray-900 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full order-1 sm:order-2">
                           <span className="font-manrope whitespace-nowrap">Explore Industry</span>
-                          <div className="arrow-icon w-5 h-5 sm:w-6 sm:h-6 bg-white  rounded-full flex items-center justify-center flex-shrink-0">
-                            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-900" />
+                          <div className="arrow-icon w-4 h-4 sm:w-5 sm:h-5 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                            <ArrowRight className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-gray-900" />
                           </div>
                         </div>
                       </div>

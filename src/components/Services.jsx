@@ -1,7 +1,7 @@
 // components/Services.jsx
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { ArrowUpRight, ArrowDownRight, Code2 } from "lucide-react";
+import { ArrowUpRight, Code2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -14,7 +14,8 @@ const SERVICES = [
       "Tailored software solutions built with modern frameworks like React, Next.js, and Node.js.",
       "Scalable architecture that grows with your business and user base.",
       "Clean code, best practices, and comprehensive testing for reliable performance."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop"
   },
   {
     title: "Web & PWA Engineering",
@@ -22,7 +23,8 @@ const SERVICES = [
       "Progressive Web Apps that work offline and load instantly on any device.",
       "Responsive designs that provide a native app-like experience in the browser.",
       "Cross-platform compatibility without the need for separate codebases."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop"
   },
   {
     title: "Mobile App Development",
@@ -30,7 +32,8 @@ const SERVICES = [
       "Native and cross-platform mobile applications for iOS and Android.",
       "Seamless user experiences with smooth animations and intuitive interfaces.",
       "Integration with device features like camera, GPS, and push notifications."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
   },
   {
     title: "API & Systems Integration",
@@ -38,7 +41,8 @@ const SERVICES = [
       "Connect your applications with third-party services and internal systems.",
       "RESTful and GraphQL APIs designed for scalability and security.",
       "Seamless data flow between your existing tools and new solutions."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop"
   },
   {
     title: "AI & Machine Learning",
@@ -46,15 +50,17 @@ const SERVICES = [
       "Integrate powerful AI features into your applications.",
       "Custom machine learning models tailored to your specific business needs.",
       "Automate workflows, generate content, and analyze data intelligently."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
   },
   {
     title: "Cloud Architecture",
     description: [
       "Scalable cloud infrastructure on AWS, Google Cloud, or Azure.",
-      "Cost-effective solutions that grow with your business.",
-      "High availability, disaster recovery, and global distribution."
-    ]
+      "Cost-effective solutions with high availability and global distribution.",
+      "Infrastructure as code for consistent and reliable environments."
+    ],
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
   },
   {
     title: "DevOps & Automation",
@@ -62,7 +68,8 @@ const SERVICES = [
       "Streamlined development pipelines for faster deployments.",
       "Automated testing and continuous integration/continuous deployment.",
       "Infrastructure as code for consistent and reliable environments."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=2070&auto=format&fit=crop"
   },
   {
     title: "UI/UX Design",
@@ -70,7 +77,8 @@ const SERVICES = [
       "Beautiful, intuitive designs that users love to interact with.",
       "User-centered design approach focused on conversion and engagement.",
       "Rapid prototyping in Figma to visualize your ideas before development."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=2070&auto=format&fit=crop"
   },
   {
     title: "E-Commerce Solutions",
@@ -78,7 +86,8 @@ const SERVICES = [
       "Custom online stores with secure payment processing.",
       "Inventory management, order tracking, and customer accounts.",
       "Optimized for conversions and mobile shopping experiences."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop"
   },
   {
     title: "Database Architecture",
@@ -86,236 +95,97 @@ const SERVICES = [
       "Efficient database design for optimal performance and scalability.",
       "SQL and NoSQL solutions based on your data requirements.",
       "Data migration, optimization, and maintenance services."
-    ]
+    ],
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=2129&auto=format&fit=crop"
   }
 ];
-
-
 
 export default function Services() {
   const [expanded, setExpanded] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(false);
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const badgeRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
-  const bottomSpanRef = useRef(null);
   const serviceItemsRef = useRef([]);
   const descriptionsRef = useRef({});
   const arrowsRef = useRef({});
   const [mounted, setMounted] = useState(false);
 
+  // Check if desktop on mount and resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Handle hover-based expansion
+  const handleMouseEnter = (idx) => {
+    setHoveredIndex(idx);
+    setExpanded(idx);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+    setExpanded(null);
+  };
+
+  // Main Scroll Animation
   useEffect(() => {
     if (!mounted) return;
     const ctx = gsap.context(() => {
-      // Header animations - play once
+      // Entrance animations for header
       gsap.fromTo(badgeRef.current,
         { y: 30, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            once: true
-          }
+          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
         }
       );
 
       gsap.fromTo(titleRef.current,
         { y: 50, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            once: true
-          }
+          y: 0, opacity: 1, duration: 1, ease: "power4.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
         }
       );
 
       gsap.fromTo(subtitleRef.current,
         { y: 40, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            once: true
-          }
+          y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
         }
       );
 
-      // Bottom span animation - play once
-      gsap.fromTo(bottomSpanRef.current?.children || [],
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          delay: 0.5,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true
-          }
-        }
-      );
-
-      // Service items stagger animation - play once
-      gsap.fromTo(serviceItemsRef.current,
+      // Entrance animations for service items
+      const items = serviceItemsRef.current.filter(Boolean);
+      gsap.fromTo(items,
         { y: 50, opacity: 0 },
         {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          delay: 0.6,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-            once: true
-          }
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: sectionRef.current, start: "top 60%", once: true }
         }
       );
 
     }, sectionRef);
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger === sectionRef.current) t.kill(true);
-      });
-    };
+    return () => ctx.revert();
   }, [mounted]);
 
-
-
-  // Handle hover-based expansion
-  const handleMouseEnter = (idx) => {
-    setHoveredIndex(idx);
-
-    if (expanded !== idx) {
-      // Close previous
-      if (expanded !== null && expanded !== idx) {
-        const prevDesc = descriptionsRef.current[expanded];
-        const prevArrow = arrowsRef.current[expanded];
-        const prevItem = serviceItemsRef.current[expanded];
-
-        if (prevDesc) {
-          gsap.to(prevDesc, { height: 0, opacity: 0, duration: 0.45, ease: "power2.inOut" });
-        }
-
-        if (prevArrow) {
-          gsap.to(prevArrow, { rotation: 0, duration: 0.3, ease: "power3.inOut" });
-        }
-
-        if (prevItem) {
-          gsap.to(prevItem, {
-            paddingTop: "1.5rem",
-            paddingBottom: "1.5rem",
-            duration: 0.3,
-            ease: "power3.inOut",
-          });
-        }
-      }
-
-      // Open new
-      const newDesc = descriptionsRef.current[idx];
-      const newArrow = arrowsRef.current[idx];
-      const newItem = serviceItemsRef.current[idx];
-
-      if (newDesc) {
-        newDesc.style.display = "block";
-        newDesc.style.height = "auto";
-        const height = newDesc.scrollHeight;
-        newDesc.style.height = "0px";
-
-        gsap.to(newDesc, {
-          height: height,
-          opacity: 1,
-          duration: 0.45,
-          ease: "power2.out",
-          onComplete: () => (newDesc.style.height = "auto"),
-        });
-
-        const lines = newDesc.querySelectorAll(".description-line");
-        gsap.fromTo(lines, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, delay: 0.2, ease: "power3.out" });
-      }
-
-      if (newArrow) {
-        gsap.to(newArrow, { rotation: 180, duration: 0.3, ease: "power3.inOut" });
-      }
-
-      if (newItem) {
-        gsap.to(newItem, {
-          paddingTop: "2.5rem",
-          paddingBottom: "2.5rem",
-          duration: 0.3,
-          ease: "power3.out",
-        });
-      }
-
-      setExpanded(idx);
-    }
-  };
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-
-    if (expanded !== null) {
-      const currentDesc = descriptionsRef.current[expanded];
-      const currentArrow = arrowsRef.current[expanded];
-      const currentItem = serviceItemsRef.current[expanded];
-
-      if (currentDesc) {
-        gsap.to(currentDesc, {
-          height: 0,
-          opacity: 0,
-          duration: 0.3,
-          ease: "power3.inOut",
-          onComplete: () => { currentDesc.style.display = "none"; }
-        });
-      }
-
-      if (currentArrow) {
-        gsap.to(currentArrow, {
-          rotation: 0,
-          duration: 0.3,
-          ease: "power3.inOut"
-        });
-      }
-
-      if (currentItem) {
-        gsap.to(currentItem, {
-          paddingTop: "1.5rem",
-          paddingBottom: "1.5rem",
-          duration: 0.3,
-          ease: "power3.inOut"
-        });
-      }
-
-      setExpanded(null); // Close any open item
-    }
-  };
   return (
-    <section ref={sectionRef} className="w-full bg-black text-white py-16 px-6 md:px-20 overflow-hidden relative">
+    <section ref={sectionRef} className="w-full bg-black text-white py-12 px-6 md:px-20 overflow-hidden relative">
       {/* Header */}
       <div ref={headerRef} className="text-center mb-16">
         <div
@@ -328,34 +198,22 @@ export default function Services() {
 
         <h2
           ref={titleRef}
-          className="font-manrope font-bold text-5xl md:text-6xl lg:text-7xl text-white mb-4 leading-tight"
+          className="font-manrope font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 leading-tight"
         >
-          Your Needs, <span className="text-gray-400 ">Our Expertise</span>
+          Your Needs, <span className="text-gray-400">Our Expertise</span>
         </h2>
 
         <p
           ref={subtitleRef}
-          className="font-instrument text-gray-400 max-w-2xl mx-auto text-lg"
+          className="font-instrument text-gray-400 max-w-2xl mx-auto text-base md:text-lg"
         >
           Comprehensive solutions tailored to your business needs
         </p>
       </div>
 
-      {/* Tags */}
-      <div
-        ref={bottomSpanRef}
-        className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 w-full mt-8 pt-8 border-t border-gray-800"
-      >
-        <span className="font-['Manrope'] text-xs md:text-sm text-gray-400 font-bold uppercase tracking-wide hover:text-white transition-colors duration-300 cursor-default">UX/UI Design</span>
-        <span className="font-['Manrope'] text-xs md:text-sm text-gray-400 font-bold uppercase tracking-wide hover:text-white transition-colors duration-300 cursor-default">Brand Identity</span>
-        <span className="font-['Manrope'] text-xs md:text-sm text-gray-400 font-bold uppercase tracking-wide hover:text-white transition-colors duration-300 cursor-default">Web Development</span>
-        <span className="font-['Manrope'] text-xs md:text-sm text-gray-400 font-bold uppercase tracking-wide hover:text-white transition-colors duration-300 cursor-default">App Development</span>
-        <span className="font-['Manrope'] text-xs md:text-sm text-gray-400 font-bold uppercase tracking-wide hover:text-white transition-colors duration-300 cursor-default">Marketing</span>
-      </div>
-
-      {/* Service List */}
-      <div className="max-w-7xl mx-auto mt-16 relative z-10">
-        {SERVICES.map((service, idx) => {
+      {/* Service List - 10 Main Services */}
+      <div className="max-w-7xl mx-auto mt-16 relative z-10 flex flex-col">
+        {SERVICES.slice(0, 10).map((service, idx) => {
           const isOpen = expanded === idx;
           const isHovered = hoveredIndex === idx;
 
@@ -363,74 +221,87 @@ export default function Services() {
             <div
               key={idx}
               ref={el => serviceItemsRef.current[idx] = el}
-              className={`group flex flex-col md:flex-row items-start md:items-center px-0  transition-all duration-500 cursor-pointer border-b border-gray-800/50 ${isOpen ? "bg-gradient-to-r from-white/5 to-transparent md:px-3 py-4 md:py-5 " : " md:px-4 py-6 md:py-8"
-                }`}
-              onMouseEnter={() => handleMouseEnter(idx)}
-              onMouseLeave={handleMouseLeave}
+              className={`group relative flex flex-col lg:flex-row items-start lg:items-center px-0 transition-all duration-500 cursor-pointer border-t border-gray-800/50 ${isOpen ? "bg-white/5 px-4 md:px-8 py-7 md:py-10" : "hover:bg-white/5 hover:px-2 md:hover:px-4 py-5 md:py-7"}`}
+              onMouseEnter={() => isDesktop && handleMouseEnter(idx)}
+              onMouseLeave={() => isDesktop && handleMouseLeave()}
+              onClick={() => {
+                if (!isDesktop) {
+                  setExpanded(isOpen ? null : idx);
+                }
+              }}
             >
-              <div className="flex flex-col items-start justify-start md:w-2/12 w-full text-left mb-2 md:mb-0">
-                <span
-                  className={`font-['manrope'] text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest transition-all duration-500 ${isOpen ? "text-white scale-110" : isHovered ? "text-gray-300" : "text-gray-700"
-                    }`}
-                >
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-              </div>
-
-              <div className="flex flex-col justify-center md:w-6/12 w-full pl-0 md:pl-4 pr-0 md:pr-8">
-                <span
-                  className={`font-['Instrument_Sans'] text-xl md:text-2xl lg:text-3xl font-medium w-full transition-all duration-500 ${isOpen ? "text-white" : isHovered ? "text-gray-200" : "text-gray-400"
-                    }`}
-                >
-                  {service.title}
-                </span>
-              </div>
-
-              <div className="flex flex-col items-end justify-start md:w-4/12 w-full mt-2 md:mt-0">
-                <div className="flex flex-col items-end w-full">
-                  <div
-                    ref={el => arrowsRef.current[idx] = el}
-                    className="mb-3 transform-gpu"
-                    style={{ transform: `rotate(${isOpen ? 180 : 0}deg)` }}
-                  >
-                    {isOpen ? (
-                      <ArrowUpRight className={`w-6 h-6 transition-all duration-300 ${isOpen ? "text-white" : "text-gray-600"
-                        }`} />
-                    ) : (
-                      <ArrowDownRight className={`w-6 h-6 transition-all duration-300 ${isOpen ? "text-white" : isHovered ? "text-gray-400" : "text-gray-600"
-                        }`} />
-                    )}
+              {/* Top Row for Mobile (Number + Title + Arrow) */}
+              <div className="flex w-full items-center justify-between lg:contents">
+                <div className="flex items-center gap-4 lg:contents">
+                  {/* Number - Column 1 */}
+                  <div className="lg:w-1/12 flex items-center">
+                    <span className={`font-manrope text-2xl md:text-3xl lg:text-4xl font-bold transition-all duration-500 ${isOpen ? "text-white scale-110" : "text-gray-800"}`}>
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
                   </div>
 
-                  <div
-                    ref={el => descriptionsRef.current[idx] = el}
-                    className="w-full overflow-hidden"
-                    style={{
-                      height: isOpen ? "auto" : "0px",
-                      opacity: isOpen ? 1 : 0,
-                    }}
-                  >
-                    <div className="flex flex-col gap-2 mt-2">
-                      {service.description.map((desc, i) => (
-                        <p
-                          key={i}
-                          className="description-line font-['Manrope'] text-gray-400 text-xs md:text-sm leading-relaxed text-left"
-                        >
-                          {desc}
-                        </p>
-                      ))}
+                  {/* Title - Column 2 Part 1 */}
+                  <div className="lg:w-7/12 flex flex-col items-start justify-center">
+                    <h3 className={`font-instrument text-lg md:text-xl lg:text-2xl font-medium transition-all duration-500 ${isOpen ? "text-white" : "text-gray-400"}`}>
+                      {service.title}
+                    </h3>
+
+                    {/* Description - Desktop Position */}
+                    <div className={`hidden lg:block transition-all duration-700 overflow-hidden ${isOpen ? 'opacity-100 max-h-40 mt-1' : 'opacity-0 max-h-0'}`}>
+                      <div className="flex flex-col gap-1">
+                        {service.description.map((desc, i) => (
+                          <p key={i} className="font-manrope text-gray-400 lg:text-xs leading-relaxed max-w-lg">
+                            {desc}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                {/* Arrow Indicator (Mobile) - Always visible */}
+                <div className="lg:hidden">
+                  <ArrowUpRight
+                    className={`w-5 h-5 transition-all duration-300 ${isOpen ? "text-white" : "text-gray-600"
+                      } ${isHovered ? "rotate-12 scale-110" : "rotate-0"
+                      }`}
+                  />
+                </div>
+              </div>
+
+              {/* Description Reveal - Mobile Position */}
+              <div className={`lg:hidden w-full transition-all duration-700 overflow-hidden ${isOpen ? 'opacity-100 max-h-96 mt-4' : 'opacity-0 max-h-0'}`}>
+                <div className="flex flex-col gap-2 pl-12 md:pl-16">
+                  {service.description.map((desc, i) => (
+                    <p key={i} className="font-manrope text-gray-400 text-xs md:text-sm leading-relaxed">
+                      {desc}
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Image Reveal - Desktop Only */}
+              <div className="hidden lg:flex lg:w-[350px] justify-end overflow-hidden transition-all duration-700 ease-in-out pr-6">
+                <div
+                  className={`w-full aspect-video lg:aspect-auto lg:h-24 overflow-hidden rounded-xl relative transition-all duration-700 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 h-0'}`}
+                >
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+              </div>
+
+              {/* Arrow Indicator (Desktop) - Always visible, rotates on hover */}
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden xl:block transition-all duration-300">
+                <ArrowUpRight
+                  className={`w-8 h-8 transition-all duration-300 ${isOpen ? "text-white" : "text-gray-600"
+                    } ${isHovered ? "rotate-12 scale-110" : "rotate-0"
+                    }`}
+                />
               </div>
             </div>
           );
         })}
       </div>
-
-
-
-
     </section>
   );
 }

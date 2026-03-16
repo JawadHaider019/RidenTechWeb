@@ -6,6 +6,10 @@
   --foreground: #171717;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -28,4 +32,3 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
-

@@ -152,7 +152,7 @@ export default function Blog() {
         ScrollTrigger.create({
           trigger: sectionRef.current,
           start: "top top",
-          end: () => `+=${scrollLength + 200}`,
+          end: () => `+=${scrollLength + 100}`,
           scrub: 1.2,
           pin: pinContainerRef.current,
           pinSpacing: true,
@@ -221,18 +221,18 @@ export default function Blog() {
       ref={sectionRef}
       className="w-full bg-gradient-to-br from-white to-gray-50 relative"
     >
-      <div className="w-full h-[120vh] overflow-hidden relative"></div>
+      <div className="w-full h-screen overflow-hidden relative"></div>
     </section>
   );
 
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-gradient-to-br from-white to-gray-50 relative"
+      className="w-full bg-white  relative"
     >
       <div
         ref={pinContainerRef}
-        className={`w-full ${isMobile || isTablet ? 'py-16' : 'h-[120vh]'} overflow-hidden relative`}
+        className={`w-full ${isMobile || isTablet ? 'py-10' : 'h-screen'} overflow-hidden relative`}
       >
         {/* Background decorative elements */}
         <div className="absolute inset-0 pointer-events-none">
@@ -296,7 +296,7 @@ export default function Blog() {
             >
               {recentPosts.map((post, index) => (
                 <Link
-                  href={`/blog/${post.slug}`}
+                  href={`/blogs/${post.slug}`}
                   key={post.id}
                   className="group w-[380px] bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-gray-400"
                 >
@@ -323,7 +323,7 @@ export default function Blog() {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col h-[220px]">
                     {/* META */}
                     <div className="flex items-center gap-4 mb-4 text-gray-500 text-sm font-manrope">
                       <div className="flex items-center gap-1.5">
@@ -333,18 +333,17 @@ export default function Blog() {
                     </div>
 
                     {/* TITLE */}
-                    <h3 className="font-instrument text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-gray-700 transition-colors duration-300">
+                    <h3 className="font-instrument text-xl font-bold text-gray-900 mb-3 line-clamp-1 group-hover:text-gray-700 transition-colors duration-300">
                       {post.title}
                     </h3>
 
                     {/* EXCERPT */}
-                    <p className="font-instrument text-gray-600 text-sm mb-5 line-clamp-2 leading-relaxed">
+                    <p className="font-instrument text-gray-600 text-sm mb-5 line-clamp-2 leading-relaxed flex-grow">
                       {post.excerpt}
                     </p>
 
                     {/* AUTHOR & READ MORE */}
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
                       <div className="flex items-center gap-1 text-gray-600 group-hover:text-gray-900 transition-colors duration-300">
                         <span className="font-manrope text-sm font-medium">Read</span>
                         <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -438,7 +437,7 @@ export default function Blog() {
               >
                 {recentPosts.map((post, index) => (
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={`/blogs/${post.slug}`}
                     key={post.id}
                     className="group w-[280px] sm:w-[300px] bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex-shrink-0"
                   >
@@ -463,7 +462,7 @@ export default function Blog() {
                     </div>
 
                     {/* CONTENT */}
-                    <div className="p-4">
+                    <div className="p-4 flex flex-col h-[180px]">
                       {/* META */}
                       <div className="flex items-center gap-2 mb-2 text-gray-400 text-xs font-manrope">
                         <div className="flex items-center gap-1">
@@ -478,12 +477,12 @@ export default function Blog() {
                       </div>
 
                       {/* TITLE */}
-                      <h3 className="font-instrument text-base font-bold text-gray-900 mb-2 line-clamp-2">
+                      <h3 className="font-instrument text-base font-bold text-gray-900 mb-2 line-clamp-1">
                         {post.title}
                       </h3>
 
                       {/* AUTHOR */}
-                      <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-50">
+                      <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-50">
                         <div className="flex items-center gap-1.5">
                           <div className="relative w-5 h-5 rounded-full overflow-hidden">
                             <Image
@@ -493,7 +492,7 @@ export default function Blog() {
                               className="object-cover"
                             />
                           </div>
-                          <span className="font-manrope text-xs text-gray-500">
+                          <span className="font-manrope text-xs text-gray-500 line-clamp-1">
                             {post.author}
                           </span>
                         </div>

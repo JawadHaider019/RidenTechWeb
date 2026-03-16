@@ -13,9 +13,9 @@ export default function AboutPage() {
       {/* Hero Section for About */}
       <HeroSection
         title="ABOUT US"
-        subtitle="Building a legacy of innovation and trust"
-        imageSrc="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
-        overlayColor="bg-white"
+        subtitle="We're a team of passionate creators dedicated to building exceptional digital experiences that drive real business growth."
+        primaryCta={{ text: "Meet the Team", href: "/team" }}
+        secondaryCta={{ text: "Our Story", href: "/story" }}
       />
 
       <AboutUs />
