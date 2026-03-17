@@ -144,9 +144,7 @@ const Hero = () => {
 
             {/* Description */}
             <p ref={descriptionRef} className="font-instrument text-base md:text-lg lg:text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              We craft cutting-edge digital solutions that drive growth,
-              enhance efficiency, and transform complex challenges into
-              seamless experiences.
+              We craft cutting-edge digital solutions that drive growth, enhance efficiency, and transform complex challenges into seamless digital experiences.
             </p>
 
             {/* CTA Buttons */}
@@ -187,7 +185,7 @@ const Hero = () => {
                 <div
                   className="w-full h-full bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop')"
+                    backgroundImage: "url('/hero.jpg')"
                   }}
                 ></div>
               </div>

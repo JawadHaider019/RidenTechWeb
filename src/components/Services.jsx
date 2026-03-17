@@ -11,92 +11,92 @@ const SERVICES = [
   {
     title: "Custom Software Development",
     description: [
-      "Tailored software solutions built with modern frameworks like React, Next.js, and Node.js.",
-      "Scalable architecture that grows with your business and user base.",
-      "Clean code, best practices, and comprehensive testing for reliable performance."
+      "Custom software solutions built using modern technologies like React, Next.js, and Node.js.",
+      "Scalable and secure architecture designed to grow with your business needs.",
+      "Clean, maintainable code with best practices and thorough testing for reliable performance."
     ],
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop"
+    image: "/softdev.jpg"
   },
   {
     title: "Web & PWA Engineering",
     description: [
-      "Progressive Web Apps that work offline and load instantly on any device.",
-      "Responsive designs that provide a native app-like experience in the browser.",
-      "Cross-platform compatibility without the need for separate codebases."
+      "High-performance Progressive Web Apps (PWAs) that load fast and work offline.",
+      "Responsive, SEO-friendly web applications with a seamless user experience.",
+      "Cross-platform solutions that reduce development cost and time."
     ],
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2064&auto=format&fit=crop"
+    image: "/webdev.jpg"
   },
   {
     title: "Mobile App Development",
     description: [
-      "Native and cross-platform mobile applications for iOS and Android.",
-      "Seamless user experiences with smooth animations and intuitive interfaces.",
+      "Custom mobile applications for iOS and Android with native and cross-platform technologies.",
+      "Intuitive UI/UX with smooth performance and engaging user experiences.",
       "Integration with device features like camera, GPS, and push notifications."
     ],
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
+    image: "/mobdev.jpg"
   },
   {
     title: "API & Systems Integration",
     description: [
-      "Connect your applications with third-party services and internal systems.",
-      "RESTful and GraphQL APIs designed for scalability and security.",
-      "Seamless data flow between your existing tools and new solutions."
+      "Secure API development and seamless integration with third-party services.",
+      "RESTful and GraphQL APIs optimized for performance and scalability.",
+      "Efficient data synchronization across your business systems and platforms."
     ],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop"
+    image: "/api.jpg"
   },
   {
     title: "AI & Machine Learning",
     description: [
-      "Integrate powerful AI features into your applications.",
-      "Custom machine learning models tailored to your specific business needs.",
-      "Automate workflows, generate content, and analyze data intelligently."
+      "AI-powered solutions to automate processes and improve decision-making.",
+      "Custom machine learning models tailored to your business requirements.",
+      "Smart data analysis, content generation, and workflow automation."
     ],
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
+    image: "/aiml.jpg"
   },
   {
     title: "Cloud Architecture",
     description: [
-      "Scalable cloud infrastructure on AWS, Google Cloud, or Azure.",
-      "Cost-effective solutions with high availability and global distribution.",
-      "Infrastructure as code for consistent and reliable environments."
+      "Scalable cloud solutions using AWS, Google Cloud, and Microsoft Azure.",
+      "High-availability infrastructure with secure and cost-optimized deployments.",
+      "Infrastructure as code for reliable and consistent environments."
     ],
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+    image: "/cloud.jpg"
   },
   {
     title: "DevOps & Automation",
     description: [
-      "Streamlined development pipelines for faster deployments.",
-      "Automated testing and continuous integration/continuous deployment.",
-      "Infrastructure as code for consistent and reliable environments."
+      "Automated CI/CD pipelines for faster and more efficient deployments.",
+      "Continuous integration, testing, and monitoring for high-quality delivery.",
+      "Optimized workflows that improve team productivity and system reliability."
     ],
-    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=2070&auto=format&fit=crop"
+    image: "/devops.jpg"
   },
   {
     title: "UI/UX Design",
     description: [
-      "Beautiful, intuitive designs that users love to interact with.",
-      "User-centered design approach focused on conversion and engagement.",
-      "Rapid prototyping in Figma to visualize your ideas before development."
+      "Modern, user-friendly designs focused on engagement and conversion.",
+      "User-centered design approach backed by research and usability testing.",
+      "Interactive prototypes and design systems created in Figma."
     ],
-    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=2070&auto=format&fit=crop"
+    image: "/uxui.jpg"
   },
   {
     title: "E-Commerce Solutions",
     description: [
-      "Custom online stores with secure payment processing.",
-      "Inventory management, order tracking, and customer accounts.",
-      "Optimized for conversions and mobile shopping experiences."
+      "Custom e-commerce platforms with secure payment gateway integration.",
+      "Advanced features like inventory management, order tracking, and analytics.",
+      "Optimized for conversions, speed, and mobile-first shopping experiences."
     ],
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop"
+    image: "/ecommerce.jpg"
   },
   {
     title: "Database Architecture",
     description: [
-      "Efficient database design for optimal performance and scalability.",
-      "SQL and NoSQL solutions based on your data requirements.",
-      "Data migration, optimization, and maintenance services."
+      "Robust database design for scalability, performance, and security.",
+      "SQL and NoSQL solutions tailored to your application needs.",
+      "Data migration, optimization, and ongoing database management services."
     ],
-    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=2129&auto=format&fit=crop"
+    image: "/database.jpg"
   }
 ];
 
@@ -207,7 +207,7 @@ export default function Services() {
           ref={subtitleRef}
           className="font-instrument text-gray-400 max-w-2xl mx-auto text-base md:text-lg"
         >
-          Comprehensive solutions tailored to your business needs
+          We deliver comprehensive digital solutions tailored to your business needs, combining innovation, technology, and strategic thinking to help you achieve scalable growth and long-term success.
         </p>
       </div>
 
@@ -250,7 +250,7 @@ export default function Services() {
                     <div className={`hidden lg:block transition-all duration-700 overflow-hidden ${isOpen ? 'opacity-100 max-h-40 mt-1' : 'opacity-0 max-h-0'}`}>
                       <div className="flex flex-col gap-1">
                         {service.description.map((desc, i) => (
-                          <p key={i} className="font-manrope text-gray-400 lg:text-xs leading-relaxed max-w-lg">
+                          <p key={i} className="font-manrope text-gray-400 lg:text-sm leading-relaxed max-w-lg">
                             {desc}
                           </p>
                         ))}

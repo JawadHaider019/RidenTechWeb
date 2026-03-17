@@ -13,13 +13,12 @@ export default function AboutPage() {
       {/* Hero Section for About */}
       <HeroSection
         title="ABOUT US"
-        subtitle="We're a team of passionate creators dedicated to building exceptional digital experiences that drive real business growth."
+        subtitle="Innovating technology solutions that help businesses grow faster, operate smarter, and stay ahead in a competitive digital landscape."
         primaryCta={{ text: "Meet the Team", href: "/team" }}
-        secondaryCta={{ text: "Our Story", href: "/story" }}
       />
 
       <AboutUs />
-      <CEOMessage />
+      {/* <CEOMessage /> */}
       {/* <Team/> */}
       <Technologies />
       {/* <Testimonials/> */}

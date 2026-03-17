@@ -72,7 +72,7 @@ export default function CTA() {
       <div
         className="absolute inset-0 bg-fixed bg-cover bg-center"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop')",
+          backgroundImage: "url('/cta.png')",
           backgroundAttachment: "fixed",
         }}
       />
@@ -94,7 +94,7 @@ export default function CTA() {
             className="inline-flex items-center bg-white/10 backdrop-blur-sm text-white rounded-full px-4 py-2 mb-6 border border-white/20"
           >
             <Sparkles className="w-4 h-4 mr-2 text-yellow-400" />
-            <span className="text-xs font-manrope tracking-wider">LIMITED SPOTS AVAILABLE</span>
+            <span className="text-xs font-manrope tracking-wider uppercase">Work with us</span>
           </div>
 
           {/* Title */}
@@ -102,7 +102,7 @@ export default function CTA() {
             ref={titleRef}
             className="font-manrope font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-4 leading-tight"
           >
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Launch?</span>
+            Let's Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Together</span>
           </h2>
 
           {/* Description */}
@@ -110,8 +110,8 @@ export default function CTA() {
             ref={descriptionRef}
             className="font-instrument text-gray-300 max-w-2xl mx-auto mb-8 text-lg md:text-xl"
           >
-            Join 100+ founders who launched in 4 weeks. Let's build something great together and transform your vision into reality.
-          </p>
+            Have a project idea or need expert guidance?
+            Our team is ready to help you bring your vision to life. </p>
 
           {/* CTA Button */}
           <div ref={buttonRef} className="flex justify-center">
@@ -119,7 +119,7 @@ export default function CTA() {
               href="/contact"
               className="group relative inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full text-sm font-medium overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-white/30 font-manrope"
             >
-              <span className="relative z-10">Book Your Free Consultation</span>
+              <span className="relative z-10">Contact Us</span>
               <ArrowRight className="relative z-10 w-4 h-4 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </Link>

@@ -210,8 +210,7 @@ const About = () => {
 
           {/* Heading with animation */}
           <p ref={headingRef} className="font-instrument text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            We're a tight-knit team of creators, thinkers, and problem-solvers
-            passionate about bringing your ideas to life.
+            We’re a tight-knit team of creators, thinkers, and problem-solvers passionate about turning your ideas into powerful digital solutions.
           </p>
         </div>
 
@@ -230,7 +229,7 @@ const About = () => {
                 <div
                   className="w-full h-full bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"
+                    backgroundImage: "url('/about.jpg')"
                   }}
                 ></div>
               </div>
@@ -242,14 +241,10 @@ const About = () => {
             {/* Description Text */}
             <div ref={descriptionRef} className="space-y-4">
               <p className="font-instrument text-lg text-gray-600 leading-relaxed">
-                At Riden Tech, we believe that great software comes from great collaboration.
-                Our team combines technical expertise with creative problem-solving to build
-                solutions that aren't just functional they're exceptional.
+                At RidenTech, we believe great software is built through strong collaboration. Our team combines technical expertise with creative problem-solving to deliver solutions that aren’t just functional they’re exceptional.
               </p>
               <p className="font-instrument text-lg text-gray-600 leading-relaxed">
-                We take the time to understand your vision, your challenges, and your goals.
-                Then we roll up our sleeves and get to work, delivering polished products
-                that make a real difference for your business.
+                We take the time to understand your vision, challenges, and goals. Then we get to work, building high-quality products that create real impact for your business.
               </p>
             </div>
 

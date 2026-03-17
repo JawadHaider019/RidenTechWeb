@@ -281,7 +281,7 @@ const AboutUs = () => {
                 <div
                   className="w-full h-full bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"
+                    backgroundImage: "url('/aboutus.jpg')"
                   }}
                 ></div>
               </div>
@@ -289,23 +289,21 @@ const AboutUs = () => {
           </div>
 
           {/* Right Side - Content */}
-          <div className="order-1 lg:order-2 space-y-6">
+          <div className="order-1 lg:order-2 space-y-3 flex flex-col gap-4">
             {/* Heading with animation */}
-            <p ref={headingRef} className="font-instrument text-xl text-gray-600 leading-relaxed opacity-0">
-              We're dedicated to helping you achieve your goals with a simple, user-friendly experience.
-              We believe our commitment to your success sets us apart.
+            <p ref={headingRef} className="font-instrument text-lg text-gray-600 leading-relaxed opacity-0">
+              We are dedicated to helping you achieve your goals with intuitive, user-friendly digital solutions. Our commitment to your success drives everything we do and sets us apart.
             </p>
 
             {/* Description Text */}
-            <div ref={descriptionRef} className="space-y-4 opacity-0">
+            <div ref={descriptionRef} className=" opacity-0">
               <p className="font-instrument text-lg text-gray-600 leading-relaxed">
-                Our approach combines strategic thinking with technical excellence to deliver solutions
-                that not only meet but exceed expectations.
+                Our approach combines strategic thinking with technical excellence to deliver solutions that not only meet but exceed expectations.
               </p>
             </div>
 
             {/* Features List */}
-            <div className="space-y-4 pt-2">
+            <div className="space-y-4">
               {features.map((feature, index) => (
                 <div
                   key={index}
@@ -330,8 +328,6 @@ const AboutUs = () => {
               ))}
             </div>
 
-            {/* Border Line with animation */}
-            <div ref={borderLineRef} className="w-full h-px bg-gray-200 origin-left my-6 opacity-0 scale-x-0"></div>
 
             {/* CTA with animation */}
             <div ref={ctaRef} className="flex flex-wrap gap-4 opacity-0">
@@ -341,13 +337,6 @@ const AboutUs = () => {
               >
                 <span>Start Projects</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-
-              <Link
-                href="/about"
-                className="group inline-flex items-center space-x-2 border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-lg text-sm font-medium hover:bg-gray-900 hover:text-white transition-all duration-300 hover:shadow-lg font-manrope"
-              >
-                <span>Learn More</span>
               </Link>
             </div>
           </div>
