@@ -1,8 +1,5 @@
-// components/CTA.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,7 +13,8 @@ export default function CTA() {
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
   const buttonRef = useRef(null);
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const [mounted, setMounted] = useState(false);
 
@@ -73,7 +71,6 @@ export default function CTA() {
         className="absolute inset-0 bg-fixed bg-cover bg-center"
         style={{
           backgroundImage: "url('/cta.png')",
-          backgroundAttachment: "fixed",
         }}
       />
 
@@ -116,7 +113,7 @@ export default function CTA() {
           {/* CTA Button */}
           <div ref={buttonRef} className="flex justify-center">
             <Link
-              href="/contact"
+              to="/contact"
               className="group relative inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full text-sm font-medium overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-white/30 font-manrope"
             >
               <span className="relative z-10">Contact Us</span>
@@ -126,22 +123,6 @@ export default function CTA() {
           </div>
         </div>
       </div>
-
-      {/* CSS for fixed background */}
-      <style jsx>{`
-        .bg-fixed {
-          background-attachment: fixed;
-          -webkit-background-attachment: fixed;
-          -moz-background-attachment: fixed;
-          -o-background-attachment: fixed;
-        }
-        
-        @media (max-width: 768px) {
-          .bg-fixed {
-            background-attachment: scroll;
-          }
-        }
-      `}</style>
     </section>
   );
 }

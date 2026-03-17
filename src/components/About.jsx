@@ -1,7 +1,5 @@
-// components/About.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight, Users, Rocket, Star, Zap, Code, Sparkles, Brain } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,59 +34,70 @@ const About = () => {
       });
 
       // Badge animation - fade in and slide down
-      tl.fromTo(badgeRef.current,
-        { y: -30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-      );
+      if (badgeRef.current) {
+        tl.fromTo(badgeRef.current,
+          { y: -30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        );
+      }
 
       // Title and subtitle animation with stagger
-      tl.fromTo([titleRef.current, subtitleRef.current],
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          stagger: 0.2,
-          ease: "power4.out"
-        },
-        "-=0.4"
-      );
+      const titleTargets = [titleRef.current, subtitleRef.current].filter(Boolean);
+      if (titleTargets.length > 0) {
+        tl.fromTo(titleTargets,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.2,
+            ease: "power4.out"
+          },
+          "-=0.4"
+        );
+      }
 
       // Heading animation
-      tl.fromTo(headingRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
-      );
+      if (headingRef.current) {
+        tl.fromTo(headingRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.4"
+        );
+      }
 
       // Image animation with shape reveal and scale
-      tl.fromTo(imageRef.current,
-        {
-          opacity: 0,
-          scale: 0.9,
-          rotation: 2
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          rotation: 0,
-          duration: 1.4,
-          ease: "power3.out"
-        },
-        "-=0.6"
-      );
+      if (imageRef.current) {
+        tl.fromTo(imageRef.current,
+          {
+            opacity: 0,
+            scale: 0.9,
+            rotation: 2
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 1.4,
+            ease: "power3.out"
+          },
+          "-=0.6"
+        );
+      }
 
       // Description animation with fade and slide
-      tl.fromTo(descriptionRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.6"
-      );
+      if (descriptionRef.current) {
+        tl.fromTo(descriptionRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.6"
+        );
+      }
 
       // Stats animation with scale and stagger
-      const validStats = statsRef.current.filter(el => el);
-      if (validStats.length > 0) {
-        tl.fromTo(validStats,
+      const filteredStats = statsRef.current.filter(Boolean);
+      if (filteredStats.length > 0) {
+        tl.fromTo(filteredStats,
           { scale: 0.5, opacity: 0 },
           {
             scale: 1,
@@ -102,21 +111,25 @@ const About = () => {
       }
 
       // Border line animation
-      tl.fromTo(borderLineRef.current,
-        { scaleX: 0, opacity: 0 },
-        { scaleX: 1, opacity: 1, duration: 1, ease: "power3.out" },
-        "-=0.2"
-      );
+      if (borderLineRef.current) {
+        tl.fromTo(borderLineRef.current,
+          { scaleX: 0, opacity: 0 },
+          { scaleX: 1, opacity: 1, duration: 1, ease: "power3.out" },
+          "-=0.2"
+        );
+      }
 
       // CTA button animation
-      tl.fromTo(ctaRef.current,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "back.out(1.2)" },
-        "-=0.2"
-      );
+      if (ctaRef.current) {
+        tl.fromTo(ctaRef.current,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: "back.out(1.2)" },
+          "-=0.2"
+        );
+      }
 
       // Subtle pulse animation for stats on hover
-      validStats.forEach(stat => {
+      filteredStats.forEach(stat => {
         stat.addEventListener('mouseenter', () => {
           gsap.to(stat, {
             scale: 1.1,
@@ -155,7 +168,7 @@ const About = () => {
       });
 
       // Subtle floating animation for image (only on desktop)
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 1024 && imageRef.current) {
         gsap.to(imageRef.current, {
           y: 8,
           duration: 3,
@@ -249,7 +262,7 @@ const About = () => {
             </div>
 
             {/* Stats Row - Icons only (as requested) */}
-            <div className="grid grid-cols-3 gap-6 pt-4">
+            <div className="grid grid-cols-3 gap-3 pt-4">
               {/* Expert Team */}
               <div
                 ref={el => statsRef.current[0] = el}
@@ -287,10 +300,16 @@ const About = () => {
               </div>
             </div>
 
+            {/* Divider Line */}
+            <div
+              ref={borderLineRef}
+              className="w-full h-px bg-gray-200 transform origin-left"
+            ></div>
+
             {/* CTA with animation */}
-            <div ref={ctaRef} className="pt-6">
+            <div ref={ctaRef} className="pt-2">
               <Link
-                href="/about"
+                to="/about"
                 className="group inline-flex items-center space-x-2 bg-gray-900 text-white px-8 py-4 rounded-lg text-sm font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg font-manrope"
               >
                 <span>Learn More About Us</span>

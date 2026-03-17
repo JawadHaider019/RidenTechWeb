@@ -1,7 +1,4 @@
-// components/Testimonials.jsx
-"use client";
 import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
 import { ArrowUpRight, Star, Zap } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -126,10 +123,13 @@ export default function Testimonials() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Set initial states
-      gsap.set([badgeRef.current, titleRef.current, subtitleRef.current, headingRef.current, ctaRef.current], {
-        opacity: 0,
-        y: 50
-      });
+      const initialTargets = [badgeRef.current, titleRef.current, subtitleRef.current, headingRef.current, ctaRef.current].filter(Boolean);
+      if (initialTargets.length > 0) {
+        gsap.set(initialTargets, {
+          opacity: 0,
+          y: 50
+        });
+      }
 
       // Create a timeline for header animations that plays when section enters viewport
       const tl = gsap.timeline({
@@ -143,47 +143,58 @@ export default function Testimonials() {
       });
 
       // Badge animation - fade in and slide down
-      tl.to(badgeRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out"
-      });
+      if (badgeRef.current) {
+        tl.to(badgeRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out"
+        });
+      }
 
       // Title animations with stagger
-      tl.to([titleRef.current, subtitleRef.current], {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power4.out"
-      }, "-=0.4");
+      const titleTargets = [titleRef.current, subtitleRef.current].filter(Boolean);
+      if (titleTargets.length > 0) {
+        tl.to(titleTargets, {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.1,
+          ease: "power4.out"
+        }, "-=0.4");
+      }
 
       // Heading description animation
-      tl.to(headingRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out"
-      }, "-=0.2");
+      if (headingRef.current) {
+        tl.to(headingRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out"
+        }, "-=0.2");
+      }
 
       // CTA animation
-      tl.to(ctaRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "back.out(1.2)"
-      }, "-=0.2");
+      if (ctaRef.current) {
+        tl.to(ctaRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "back.out(1.2)"
+        }, "-=0.2");
+      }
 
       // Continuous bouncing animation for badge
-      gsap.to(badgeRef.current, {
-        y: -5,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-        delay: 1
-      });
+      if (badgeRef.current) {
+        gsap.to(badgeRef.current, {
+          y: -5,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+          delay: 1
+        });
+      }
 
       // Initialize carousel animation
       if (trackRef.current) {
@@ -375,12 +386,10 @@ export default function Testimonials() {
                           </div>
                           <div className="flex items-center gap-2">
                             <div className="relative w-5 h-3.5 overflow-hidden rounded-sm shadow-sm">
-                              <Image
+                              <img
                                 src={countryFlags[testimonial.location]}
                                 alt={`${testimonial.location} flag`}
-                                fill
-                                className="object-cover"
-                                unoptimized
+                                className="w-full h-full object-cover"
                               />
                             </div>
                             <span className="font-manrope text-xs text-gray-500">
@@ -399,13 +408,13 @@ export default function Testimonials() {
 
         {/* Bottom CTA */}
         <div ref={ctaRef} className="text-center mt-16">
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="group inline-flex items-center space-x-2 bg-gray-900 text-white px-8 py-4 rounded-lg text-sm font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg font-manrope"
           >
             <span>Start Your Success Story</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

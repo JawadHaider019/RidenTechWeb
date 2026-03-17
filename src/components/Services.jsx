@@ -1,5 +1,3 @@
-// components/Services.jsx
-"use client";
 import { useState, useEffect, useRef } from "react";
 import { ArrowUpRight, Code2 } from "lucide-react";
 import gsap from "gsap";
@@ -146,39 +144,47 @@ export default function Services() {
     if (!mounted) return;
     const ctx = gsap.context(() => {
       // Entrance animations for header
-      gsap.fromTo(badgeRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
-        }
-      );
+      if (badgeRef.current) {
+        gsap.fromTo(badgeRef.current,
+          { y: 30, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
+          }
+        );
+      }
 
-      gsap.fromTo(titleRef.current,
-        { y: 50, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 1, ease: "power4.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
-        }
-      );
+      if (titleRef.current) {
+        gsap.fromTo(titleRef.current,
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1, ease: "power4.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
+          }
+        );
+      }
 
-      gsap.fromTo(subtitleRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
-        }
-      );
+      if (subtitleRef.current) {
+        gsap.fromTo(subtitleRef.current,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: "power3.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true }
+          }
+        );
+      }
 
       // Entrance animations for service items
       const items = serviceItemsRef.current.filter(Boolean);
-      gsap.fromTo(items,
-        { y: 50, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 60%", once: true }
-        }
-      );
+      if (items.length > 0) {
+        gsap.fromTo(items,
+          { y: 50, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+            scrollTrigger: { trigger: sectionRef.current, start: "top 60%", once: true }
+          }
+        );
+      }
 
     }, sectionRef);
     return () => ctx.revert();

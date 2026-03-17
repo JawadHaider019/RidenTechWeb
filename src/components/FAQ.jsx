@@ -1,8 +1,6 @@
-// components/FAQ.jsx
-"use client";
 import { useState, useEffect, useRef } from "react";
 import { ChevronDown, HelpCircle, Mail, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -84,78 +82,92 @@ export default function FAQ() {
       });
 
       // Set initial states for entrance animations
-      gsap.set([badgeRef.current, titleRef.current, subtitleRef.current, ...faqItemsRef.current, ctaRef.current], {
-        opacity: 0,
-        y: 50
-      });
+      const initialTargets = [badgeRef.current, titleRef.current, subtitleRef.current, ...faqItemsRef.current.filter(Boolean), ctaRef.current].filter(Boolean);
+      if (initialTargets.length > 0) {
+        gsap.set(initialTargets, {
+          opacity: 0,
+          y: 50
+        });
+      }
 
       // Badge animation - fade in from top with bounce
-      tl.fromTo(badgeRef.current,
-        { y: -50, opacity: 0, scale: 0.8 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "back.out(1.7)"
-        }
-      );
+      if (badgeRef.current) {
+        tl.fromTo(badgeRef.current,
+          { y: -50, opacity: 0, scale: 0.8 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: "back.out(1.7)"
+          }
+        );
+      }
 
       // Title animation - dramatic reveal
-      tl.fromTo(titleRef.current,
-        { y: 100, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power4.out"
-        },
-        "-=0.6"
-      );
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current,
+          { y: 100, opacity: 0, scale: 0.9 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power4.out"
+          },
+          "-=0.6"
+        );
+      }
 
       // Subtitle animation - slide up
-      tl.fromTo(subtitleRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out"
-        },
-        "-=0.4"
-      );
+      if (subtitleRef.current) {
+        tl.fromTo(subtitleRef.current,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out"
+          },
+          "-=0.4"
+        );
+      }
 
       // FAQ items stagger animation with entrance effects
-      tl.fromTo(faqItemsRef.current,
-        {
-          y: 60,
-          opacity: 0,
-          scale: 0.95
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out"
-        },
-        "-=0.2"
-      );
+      const validFaqItems = faqItemsRef.current.filter(Boolean);
+      if (validFaqItems.length > 0) {
+        tl.fromTo(validFaqItems,
+          {
+            y: 60,
+            opacity: 0,
+            scale: 0.95
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+          },
+          "-=0.2"
+        );
+      }
 
       // CTA animation with pop effect
-      tl.fromTo(ctaRef.current,
-        { y: 40, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: "back.out(1.4)"
-        },
-        "-=0.2"
-      );
+      if (ctaRef.current) {
+        tl.fromTo(ctaRef.current,
+          { y: 40, opacity: 0, scale: 0.9 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.4)"
+          },
+          "-=0.2"
+        );
+      }
 
       // Parallax effect for background elements
       gsap.to('.faq-bg-1', {
@@ -329,7 +341,7 @@ export default function FAQ() {
               <p className="font-instrument text-gray-600 mb-8 relative z-10">
                 If you&apos;re curious or need more info, feel free to reach out we&apos;re here to help!
               </p>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-4 rounded-xl font-manrope font-medium hover:bg-black transition-all duration-300 group/btn">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-4 rounded-xl font-manrope font-medium hover:bg-black transition-all duration-300 group/btn">
                 <span>Contact Us Now</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
               </Link>

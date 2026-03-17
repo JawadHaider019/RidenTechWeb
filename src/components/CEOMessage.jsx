@@ -1,7 +1,4 @@
-// components/CEOMessage.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -35,48 +32,54 @@ export default function CEOMessage() {
       });
 
       // Quote mark animation (from left)
-      tl.fromTo(quoteRef.current,
-        {
-          x: -100,
-          opacity: 0
-        },
-        {
-          x: 0,
-          opacity: 0.1,
-          duration: 1,
-          ease: "power3.out"
-        }
-      );
+      if (quoteRef.current) {
+        tl.fromTo(quoteRef.current,
+          {
+            x: -100,
+            opacity: 0
+          },
+          {
+            x: 0,
+            opacity: 0.1,
+            duration: 1,
+            ease: "power3.out"
+          }
+        );
+      }
 
       // Name animation (from left)
-      tl.fromTo(nameRef.current,
-        {
-          x: -100,
-          opacity: 0
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out"
-        },
-        "-=0.7"
-      );
+      if (nameRef.current) {
+        tl.fromTo(nameRef.current,
+          {
+            x: -100,
+            opacity: 0
+          },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out"
+          },
+          "-=0.7"
+        );
+      }
 
       // Title animation (from left)
-      tl.fromTo(titleRef.current,
-        {
-          x: -100,
-          opacity: 0
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out"
-        },
-        "-=0.6"
-      );
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current,
+          {
+            x: -100,
+            opacity: 0
+          },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out"
+          },
+          "-=0.6"
+        );
+      }
 
       // Message paragraphs animation (from left with stagger)
       const paragraphs = messageRef.current?.children;
@@ -98,29 +101,33 @@ export default function CEOMessage() {
       }
 
       // Image animation (from right)
-      tl.fromTo(imageRef.current,
-        {
-          x: 100,
-          opacity: 0
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: "power4.out"
-        },
-        "-=0.8"
-      );
+      if (imageRef.current) {
+        tl.fromTo(imageRef.current,
+          {
+            x: 100,
+            opacity: 0
+          },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 1.2,
+            ease: "power4.out"
+          },
+          "-=0.8"
+        );
+      }
 
       // Continuous floating animation for image (like in About component)
-      gsap.to(imageRef.current, {
-        y: 8,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-        delay: 1.5
-      });
+      if (imageRef.current) {
+        gsap.to(imageRef.current, {
+          y: 8,
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+          delay: 1.5
+        });
+      }
 
     }, sectionRef);
 
@@ -227,12 +234,10 @@ export default function CEOMessage() {
             className="relative h-[500px] w-full max-w-[500px] mx-auto lg:mx-0 lg:ml-auto"
           >
             <div className="relative w-full h-full overflow-hidden rounded-2xl shadow-xl">
-              <Image
+              <img
                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
                 alt="CEO Johnathan Reynolds"
-                fill
-                className="object-cover"
-                priority
+                className="w-full h-full object-cover"
               />
             </div>
           </div>

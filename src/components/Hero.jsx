@@ -1,7 +1,5 @@
-// components/Hero.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 
@@ -23,76 +21,93 @@ const Hero = () => {
       const tl = gsap.timeline();
 
       // Initial fade in for the whole section
-      tl.fromTo(heroRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 }
-      );
+      if (heroRef.current) {
+        tl.fromTo(heroRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 }
+        );
+      }
 
       // Badge animation
-      tl.fromTo(badgeRef.current,
-        { y: -30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.3"
-      );
+      if (badgeRef.current) {
+        tl.fromTo(badgeRef.current,
+          { y: -30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.3"
+        );
+      }
 
       // Heading lines stagger animation
-      tl.fromTo(headingLinesRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.9,
-          stagger: 0.15,
-          ease: "power4.out"
-        },
-        "-=0.4"
-      );
+      const validHeadingLines = headingLinesRef.current.filter(Boolean);
+      if (validHeadingLines.length > 0) {
+        tl.fromTo(validHeadingLines,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.15,
+            ease: "power4.out"
+          },
+          "-=0.4"
+        );
+      }
 
       // Description animation
-      tl.fromTo(descriptionRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.6"
-      );
+      if (descriptionRef.current) {
+        tl.fromTo(descriptionRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.6"
+        );
+      }
 
       // Buttons container fade in
-      tl.fromTo(buttonsRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        "-=0.4"
-      );
+      if (buttonsRef.current) {
+        tl.fromTo(buttonsRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 },
+          "-=0.4"
+        );
+      }
 
       // Button 1 animation
-      tl.fromTo(button1Ref.current,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-        "-=0.2"
-      );
+      if (button1Ref.current) {
+        tl.fromTo(button1Ref.current,
+          { scale: 0.8, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
+          "-=0.2"
+        );
+      }
 
       // Button 2 animation
-      tl.fromTo(button2Ref.current,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
-        "-=0.3"
-      );
+      if (button2Ref.current) {
+        tl.fromTo(button2Ref.current,
+          { scale: 0.8, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" },
+          "-=0.3"
+        );
+      }
 
       // Image animation with clip path reveal
-      tl.fromTo(imageRef.current,
-        {
-          opacity: 0,
-          scale: 0.95
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out"
-        },
-        "-=0.8"
-      );
+      if (imageRef.current) {
+        tl.fromTo(imageRef.current,
+          {
+            opacity: 0,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out"
+          },
+          "-=0.8"
+        );
+      }
 
       // Subtle floating animation for image (only on desktop)
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 1024 && imageRef.current) {
         gsap.to(imageRef.current, {
           y: 10,
           duration: 3,
@@ -151,7 +166,7 @@ const Hero = () => {
             <div ref={buttonsRef} className="flex flex-wrap gap-3 md:gap-4 lg:gap-4 justify-center lg:justify-start">
               <Link
                 ref={button1Ref}
-                href="/contact"
+                to="/contact"
                 className="group inline-flex items-center space-x-2 bg-gray-900 text-white px-5 md:px-8 lg:px-8 py-2.5 md:py-4 lg:py-4 rounded-lg text-xs md:text-sm lg:text-sm font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-gray-900/20 font-manrope"
               >
                 <span>Get Started</span>
@@ -159,7 +174,7 @@ const Hero = () => {
               </Link>
               <Link
                 ref={button2Ref}
-                href="/services"
+                to="/services"
                 className="group inline-flex items-center space-x-2 bg-white text-gray-900 px-5 md:px-8 lg:px-8 py-2.5 md:py-4 lg:py-4 rounded-lg text-xs md:text-sm lg:text-sm font-medium border border-gray-200 hover:border-gray-900 transition-all duration-300 hover:shadow-lg font-manrope"
               >
                 <span>View Services</span>

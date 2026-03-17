@@ -1,7 +1,5 @@
-// components/AboutUs.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight, Lightbulb, TrendingUp, Heart, BarChart3, Target, Zap, CheckCircle } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -69,12 +67,23 @@ const AboutUs = () => {
     window.addEventListener('resize', updateClipPath);
 
     // Set initial states
-    gsap.set([badgeRef.current, titleRef.current, headingRef.current,
-    descriptionRef.current, ...featuresRef.current.filter(el => el),
-    borderLineRef.current, ctaRef.current, imageRef.current], {
-      opacity: 0,
-      y: 30
-    });
+    const initialTargets = [
+      badgeRef.current, titleRef.current, headingRef.current,
+      descriptionRef.current, ...featuresRef.current.filter(Boolean),
+      borderLineRef.current, ctaRef.current, imageRef.current
+    ].filter(Boolean);
+
+    if (initialTargets.length > 0) {
+      gsap.set(initialTargets, {
+        opacity: 0,
+        y: 30
+      });
+    }
+
+    // Explicitly set scaleX for borderLineRef if it exists
+    if (borderLineRef.current) {
+      gsap.set(borderLineRef.current, { scaleX: 0 });
+    }
 
     const ctx = gsap.context(() => {
       // Create a master timeline with delays
@@ -89,54 +98,65 @@ const AboutUs = () => {
       });
 
       // Badge animation with delay
-      masterTl.to(badgeRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out"
-      }, 0.2); // 0.2s delay
+      if (badgeRef.current) {
+        masterTl.to(badgeRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out"
+        }, 0.2); // 0.2s delay
+      }
 
       // Title and subtitle with staggered delay
-      masterTl.to([titleRef.current], {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        stagger: 0.2,
-        ease: "power4.out"
-      }, 0.4); // 0.4s delay
+      const titleTargets = [titleRef.current].filter(Boolean);
+      if (titleTargets.length > 0) {
+        masterTl.to(titleTargets, {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          stagger: 0.2,
+          ease: "power4.out"
+        }, 0.4); // 0.4s delay
+      }
 
       // Heading with delay
-      masterTl.to(headingRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out"
-      }, 0.6); // 0.6s delay
+      if (headingRef.current) {
+        masterTl.to(headingRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out"
+        }, 0.6); // 0.6s delay
+      }
 
       // Image animation with delay
-      masterTl.fromTo(imageRef.current,
-        {
-          opacity: 0,
-          scale: 0.9,
-          rotation: 2
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          rotation: 0,
-          duration: 1.4,
-          ease: "power3.out"
-        },
-        0.8 // 0.8s delay
-      );
+      if (imageRef.current) {
+        masterTl.fromTo(imageRef.current,
+          {
+            opacity: 0,
+            scale: 0.9,
+            rotation: 2
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 1.4,
+            ease: "power3.out"
+          },
+          0.8 // 0.8s delay
+        );
+      }
 
       // Description with delay
-      masterTl.to(descriptionRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out"
-      }, 1.0); // 1.0s delay
+      if (descriptionRef.current) {
+        masterTl.to(descriptionRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out"
+        }, 1.0); // 1.0s delay
+      }
 
       // Features with staggered delay
       const validFeatures = featuresRef.current.filter(el => el);
@@ -152,25 +172,29 @@ const AboutUs = () => {
       }
 
       // Border line with delay
-      masterTl.to(borderLineRef.current, {
-        scaleX: 1,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out"
-      }, 1.8); // 1.8s delay
+      if (borderLineRef.current) {
+        masterTl.to(borderLineRef.current, {
+          scaleX: 1,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out"
+        }, 1.8); // 1.8s delay
+      }
 
       // CTA with delay
-      masterTl.to(ctaRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "back.out(1.2)"
-      }, 2.0); // 2.0s delay
+      if (ctaRef.current) {
+        masterTl.to(ctaRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "back.out(1.2)"
+        }, 2.0); // 2.0s delay
+      }
 
 
 
       // Subtle floating animation for image (only on desktop, starts after reveal)
-      if (window.innerWidth >= 1024) {
+      if (window.innerWidth >= 1024 && imageRef.current) {
         masterTl.to(imageRef.current, {
           y: 8,
           duration: 3,
@@ -332,7 +356,7 @@ const AboutUs = () => {
             {/* CTA with animation */}
             <div ref={ctaRef} className="flex flex-wrap gap-4 opacity-0">
               <Link
-                href="/contact"
+                to="/contact"
                 className="group inline-flex items-center space-x-2 bg-gray-900 text-white px-8 py-4 rounded-lg text-sm font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg font-manrope"
               >
                 <span>Start Projects</span>

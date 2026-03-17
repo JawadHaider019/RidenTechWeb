@@ -32,3 +32,26 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+/* Fixed background support for CTA and other sections */
+.bg-fixed {
+  background-attachment: fixed;
+  -webkit-background-attachment: fixed;
+  -moz-background-attachment: fixed;
+  -o-background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  .bg-fixed {
+    background-attachment: scroll;
+  }
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

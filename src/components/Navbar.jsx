@@ -1,8 +1,5 @@
-// components/Navbar.jsx
-"use client";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 
@@ -14,8 +11,9 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
 
   // Get current pathname for active link detection
-  const pathname = usePathname();
-  const router = useRouter();
+  const location = useLocation();
+  const pathname = location.pathname;
+  const navigate = useNavigate();
 
   // Refs for GSAP animations
   const navbarRef = useRef(null);
@@ -55,29 +53,24 @@ const Navbar = () => {
       .replace(/[^\w\s-]/g, '')
       .replace(/\s+/g, '-');
 
-    console.log('Navigating to service:', serviceTitle, 'ID:', serviceId);
-
     // If we're already on the services page, just scroll
     if (pathname === '/services') {
-      console.log('Already on services page, scrolling to:', serviceId);
-      // Wait a bit for any animations to complete
+
       setTimeout(() => {
         scrollToService(serviceId);
       }, 100);
     } else {
-      console.log('Navigating to services page with hash:', serviceId);
-      // Navigate to services page with hash
-      router.push(`/services#${serviceId}`);
+
+      navigate(`/services#${serviceId}`);
     }
   };
 
   // Function to scroll to a specific service
   const scrollToService = (serviceId) => {
-    console.log('Attempting to scroll to:', serviceId);
 
     const element = document.getElementById(serviceId);
     if (element) {
-      console.log('Element found, scrolling...');
+
       const yOffset = -100; // Offset for fixed navbar
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
@@ -90,13 +83,9 @@ const Navbar = () => {
         element.style.boxShadow = '';
       }, 2000);
     } else {
-      console.log('Element not found with ID:', serviceId);
-      // If element not found immediately, try again after a short delay
-      // (useful when page is still loading)
       setTimeout(() => {
         const retryElement = document.getElementById(serviceId);
         if (retryElement) {
-          console.log('Element found on retry, scrolling...');
           const yOffset = -100;
           const y = retryElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
@@ -115,14 +104,8 @@ const Navbar = () => {
   useEffect(() => {
     if (!mounted) return;
 
-    console.log('Pathname changed:', pathname);
-    console.log('Current hash:', window.location.hash);
-
     if (pathname === '/services' && window.location.hash) {
       const serviceId = window.location.hash.replace('#', '');
-      console.log('Hash detected on services page:', serviceId);
-
-      // Wait for the page to fully load and render
       setTimeout(() => {
         scrollToService(serviceId);
       }, 500);
@@ -141,17 +124,21 @@ const Navbar = () => {
       const tl = gsap.timeline();
 
       // Navbar slide down
-      tl.fromTo(navbarRef.current,
-        { y: -100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }
-      );
+      if (navbarRef.current) {
+        tl.fromTo(navbarRef.current,
+          { y: -100, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" }
+        );
+      }
 
       // Accent line animation
-      tl.fromTo(accentLineRef.current,
-        { scaleX: 0, transformOrigin: "left" },
-        { scaleX: 1, duration: 1.5, ease: "power4.out" },
-        "-=0.8"
-      );
+      if (accentLineRef.current) {
+        tl.fromTo(accentLineRef.current,
+          { scaleX: 0, transformOrigin: "left" },
+          { scaleX: 1, duration: 1.5, ease: "power4.out" },
+          "-=0.8"
+        );
+      }
 
       // Logo fade in
       if (logoRef.current) {
@@ -196,12 +183,14 @@ const Navbar = () => {
       const isScrolled = window.scrollY > 20;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
-        gsap.to(navbarRef.current, {
-          backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 1)",
-          backdropFilter: isScrolled ? "blur(8px)" : "blur(0px)",
-          duration: 0.6,
-          ease: "power3.inOut"
-        });
+        if (navbarRef.current) {
+          gsap.to(navbarRef.current, {
+            backgroundColor: isScrolled ? "rgba(255, 255, 255, 0.95)" : "rgba(255, 255, 255, 1)",
+            backdropFilter: isScrolled ? "blur(8px)" : "blur(0px)",
+            duration: 0.6,
+            ease: "power3.inOut"
+          });
+        }
       }
     };
 
@@ -217,11 +206,13 @@ const Navbar = () => {
         { y: 0, opacity: 1, duration: 0.6, ease: "power4.out" }
       );
 
-      gsap.fromTo(
-        mobileMenuRef.current.children,
-        { x: -30, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power3.out" }
-      );
+      if (mobileMenuRef.current.children.length > 0) {
+        gsap.fromTo(
+          mobileMenuRef.current.children,
+          { x: -30, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power3.out" }
+        );
+      }
     }
   }, [isOpen]);
 
@@ -235,11 +226,14 @@ const Navbar = () => {
         { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }
       );
 
-      gsap.fromTo(
-        dropdown.querySelectorAll('.dropdown-item'),
-        { y: -8, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, stagger: 0.03, delay: 0.1, ease: "power2.out" }
-      );
+      const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
+      if (dropdownItems.length > 0) {
+        gsap.fromTo(
+          dropdownItems,
+          { y: -8, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, stagger: 0.03, delay: 0.1, ease: "power2.out" }
+        );
+      }
     }
   }, [activeDropdown]);
 
@@ -466,7 +460,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo with Marcellus font */}
           <div className="flex-shrink-0" ref={logoRef} style={{ opacity: 0 }}>
-            <Link href="/" className="font-marcellus text-2xl tracking-wide text-gray-900">
+            <Link to="/" className="font-marcellus text-2xl tracking-wide text-gray-900">
               Riden<span className="text-gray-500 ml-1 text-lg font-light">Tech</span>
             </Link>
           </div>
@@ -489,7 +483,7 @@ const Navbar = () => {
                   {item.dropdown ? (
                     <div className="flex items-center">
                       <Link
-                        href={item.href}
+                        to={item.href}
                         className={`py-2 text-sm font-medium relative group font-manrope ${active ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
                           }`}
                         onClick={() => handleDropdownLinkClick()}
@@ -521,7 +515,7 @@ const Navbar = () => {
                     </div>
                   ) : (
                     <Link
-                      href={item.href}
+                      to={item.href}
                       className={`relative px-0 py-2 text-sm font-medium group inline-block font-manrope ${active ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
                         }`}
                       onMouseEnter={() => {
@@ -567,7 +561,7 @@ const Navbar = () => {
                                     return (
                                       <Link
                                         key={service.title}
-                                        href={service.href}
+                                        to={service.href}
                                         className="group/link dropdown-item"
                                         onClick={(e) => handleDropdownLinkClick(e, service.href, service.title)}
                                       >
@@ -594,7 +588,7 @@ const Navbar = () => {
                               return (
                                 <Link
                                   key={industry.title}
-                                  href={industry.href}
+                                  to={industry.href}
                                   className="group dropdown-item"
                                   onClick={() => handleDropdownLinkClick()}
                                 >
@@ -618,7 +612,7 @@ const Navbar = () => {
                               return (
                                 <Link
                                   key={dropItem.title}
-                                  href={dropItem.href}
+                                  to={dropItem.href}
                                   className="group dropdown-item"
                                   onClick={() => handleDropdownLinkClick()}
                                 >
@@ -657,7 +651,7 @@ const Navbar = () => {
           {/* Desktop CTA Button - Only visible on large screens */}
           <div className="hidden lg:block" ref={ctaButtonRef} style={{ opacity: 0 }}>
             <Link
-              href="/contact"
+              to="/contact"
               className="relative group inline-flex items-center space-x-2 bg-gray-900 text-white px-6 py-2.5 rounded-lg text-sm font-medium overflow-hidden transition-all duration-500 hover:shadow-lg hover:shadow-gray-900/20 font-manrope"
               onMouseEnter={() => handleUnderlineHover('cta', true)}
               onMouseLeave={() => handleUnderlineHover('cta', false)}
@@ -697,7 +691,7 @@ const Navbar = () => {
                       {/* Mobile category header */}
                       <div className="flex items-center justify-between">
                         <Link
-                          href={item.href}
+                          to={item.href}
                           className={`py-3 px-0 text-sm font-medium transition-all duration-300 font-manrope ${active ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
                             }`}
                           onClick={() => {
@@ -731,7 +725,7 @@ const Navbar = () => {
                             return (
                               <Link
                                 key={dropItem.title}
-                                href={dropItem.href}
+                                to={dropItem.href}
                                 className={`flex items-center justify-between py-2 pl-5 pr-2 text-sm rounded-lg transition-all duration-300 font-instrument ${isDropItemActive
                                   ? 'text-gray-900 font-medium bg-gray-50'
                                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
@@ -757,7 +751,7 @@ const Navbar = () => {
                     </div>
                   ) : (
                     <Link
-                      href={item.href}
+                      to={item.href}
                       className={`relative block py-3 px-0 text-sm font-medium transition-all duration-300 font-manrope w-full ${active ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
                         }`}
                       onClick={() => setIsOpen(false)}
@@ -772,7 +766,7 @@ const Navbar = () => {
             {/* Mobile CTA Button */}
             <div className="pt-6 mt-3 border-t border-gray-100">
               <Link
-                href="/contact"
+                to="/contact"
                 className="inline-flex items-center justify-center w-full space-x-2 bg-gray-900 text-white px-6 py-3.5 rounded-lg text-sm font-medium hover:bg-gray-800 transition-all duration-300 font-manrope"
                 onClick={() => setIsOpen(false)}
               >

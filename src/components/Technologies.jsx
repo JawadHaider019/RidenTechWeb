@@ -1,5 +1,4 @@
 // components/Technologies.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -90,42 +89,51 @@ export default function Technologies() {
       });
 
       // Badge animation
-      tl.fromTo(badgeRef.current,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
-      );
+      if (badgeRef.current) {
+        tl.fromTo(badgeRef.current,
+          { y: -20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
+        );
+      }
 
       // Title animation
-      tl.fromTo(titleRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-        "-=0.3"
-      );
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+          "-=0.3"
+        );
+      }
 
       // Subtitle animation
-      tl.fromTo(subtitleRef.current,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
-        "-=0.3"
-      );
+      if (subtitleRef.current) {
+        tl.fromTo(subtitleRef.current,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
+          "-=0.3"
+        );
+      }
 
       // Icons stagger animation
-      tl.fromTo(iconRefs.current,
-        {
-          scale: 0.8,
-          opacity: 0,
-          y: 20
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          stagger: 0.02,
-          ease: "back.out(1.2)"
-        },
-        "-=0.2"
-      );
+      const validIcons = iconRefs.current.filter(Boolean);
+      if (validIcons.length > 0) {
+        tl.fromTo(validIcons,
+          {
+            scale: 0.8,
+            opacity: 0,
+            y: 20
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.02,
+            ease: "back.out(1.2)"
+          },
+          "-=0.2"
+        );
+      }
     }, sectionRef);
 
     return () => {

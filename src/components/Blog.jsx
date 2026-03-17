@@ -1,13 +1,10 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Calendar, Clock, ChevronLeft, ChevronRight, Zap } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Draggable } from "gsap/Draggable";
-import { blogPosts } from "@/app/data/blogData";
+import { blogPosts } from "@/data/blogData";
 
 gsap.registerPlugin(ScrollTrigger, Draggable);
 
@@ -182,9 +179,9 @@ export default function Blog() {
       }
 
       // Card entrance animations
-      const cards = trackRef.current.children;
+      const cards = trackRef.current ? Array.from(trackRef.current.children).filter(Boolean) : [];
       if (cards.length > 0) {
-        gsap.fromTo(Array.from(cards),
+        gsap.fromTo(cards,
           {
             opacity: 0,
             scale: isMobile ? 0.95 : 0.9,
@@ -305,7 +302,7 @@ export default function Blog() {
               {/* CTA Button - Desktop */}
               <Link
                 ref={buttonRef}
-                href="/blogs"
+                to="/blogs"
                 className="group relative inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-xl text-sm font-medium overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-gray-900/20 font-manrope w-fit"
               >
                 <span className="relative z-10">View All News</span>
@@ -325,7 +322,7 @@ export default function Blog() {
             >
               {recentPosts.map((post) => (
                 <Link
-                  href={`/blogs/${post.slug}`}
+                  to={`/blogs/${post.slug}`}
                   key={post.id}
                   className="group w-[380px] flex-shrink-0 bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-gray-400"
                   style={{
@@ -335,11 +332,10 @@ export default function Blog() {
                 >
                   {/* IMAGE */}
                   <div className="relative h-56 w-full overflow-hidden">
-                    <Image
+                    <img
                       src={post.image}
                       alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
                     <div className="absolute top-4 right-4 z-10">
@@ -436,18 +432,8 @@ export default function Blog() {
             {/* Cards Container */}
             <div
               ref={scrollContainerRef}
-              className="overflow-hidden"
-              style={{
-                WebkitOverflowScrolling: 'touch',
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none'
-              }}
+              className="overflow-hidden hide-scrollbar"
             >
-              <style jsx>{`
-                div::-webkit-scrollbar {
-                  display: none;
-                }
-              `}</style>
 
               {/* Cards Track - NO CSS TRANSITION */}
               <div
@@ -462,7 +448,7 @@ export default function Blog() {
               >
                 {recentPosts.map((post) => (
                   <Link
-                    href={`/blogs/${post.slug}`}
+                    to={`/blogs/${post.slug}`}
                     key={post.id}
                     className="group bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex-shrink-0"
                     style={{
@@ -473,11 +459,10 @@ export default function Blog() {
                   >
                     {/* IMAGE */}
                     <div className="relative h-40 sm:h-44 w-full overflow-hidden">
-                      <Image
+                      <img
                         src={post.image}
                         alt={post.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                       <div className="absolute top-3 left-3 z-10">
@@ -508,11 +493,10 @@ export default function Blog() {
                       <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-50">
                         <div className="flex items-center gap-1.5">
                           <div className="relative w-5 h-5 rounded-full overflow-hidden">
-                            <Image
+                            <img
                               src={post.authorImage}
                               alt={post.author}
-                              fill
-                              className="object-cover"
+                              className="w-full h-full object-cover"
                             />
                           </div>
                           <span className="font-manrope text-xs text-gray-500 line-clamp-1">
@@ -533,7 +517,7 @@ export default function Blog() {
           <div className="text-center mt-10 px-4">
             <Link
               ref={mobileButtonRef}
-              href="/blogs"
+              to="/blogs"
               className="group inline-flex items-center gap-2 bg-gray-900 text-white px-8 py-4 rounded-xl text-sm font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg font-manrope"
             >
               View All Blogs

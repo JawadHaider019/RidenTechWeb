@@ -1,8 +1,5 @@
-// components/HeroSection.jsx
-"use client";
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -168,7 +165,7 @@ export default function HeroSection1({
 
         <div className="mt-10 flex justify-center opacity-0" ref={buttonRef}>
           <Link
-            href="/contact"
+            to="/contact"
             className="group relative inline-flex items-center gap-2 px-10 py-4 bg-gray-900 text-white rounded-full overflow-hidden transition-transform duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl"
           >
             <span className="relative z-10 font-manrope font-semibold tracking-wide">
@@ -193,12 +190,10 @@ export default function HeroSection1({
         className="w-full max-w-7xl h-[85vh]  relative overflow-hidden mx-auto flex justify-center items-center"
       >
         {/* Full image */}
-        <Image
+        <img
           src={imageSrc}
           alt={title}
-          fill
           className="object-cover w-full h-full mx-auto"
-          priority
         />
 
         {/* Top overlay */}

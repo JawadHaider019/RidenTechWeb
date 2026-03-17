@@ -1,16 +1,15 @@
-// app/data/blogData.js
 export const blogPosts = [
-  {
-    id: 1,
-    slug: "covering-durability-and-innovation-construction",
-    category: "Marketing",
-    comments: 3,
-    day: "15",
-    month: "May",
-    year: "25",
-    title: "Covering Durability and Innovation Construction.",
-    excerpt: "Discover how modern construction techniques are combining durability with innovative design principles.",
-    content: `
+    {
+        id: 1,
+        slug: "covering-durability-and-innovation-construction",
+        category: "Marketing",
+        comments: 3,
+        day: "15",
+        month: "May",
+        year: "25",
+        title: "Covering Durability and Innovation Construction.",
+        excerpt: "Discover how modern construction techniques are combining durability with innovative design principles.",
+        content: `
       <p>In the ever-evolving world of construction, durability and innovation are no longer mutually exclusive. Modern building techniques have revolutionized how we approach structural integrity while pushing the boundaries of design.</p>
       
       <h2>The Evolution of Construction Materials</h2>
@@ -28,24 +27,24 @@ export const blogPosts = [
         <li>The integration of smart technology is becoming standard in new constructions</li>
       </ul>
     `,
-    author: "Jackson Pot",
-    authorImage: "https://randomuser.me/api/portraits/men/32.jpg",
-    authorBio: "Jackson is a construction technology expert with over 15 years of experience in innovative building methods and sustainable architecture. He has worked on projects across 5 continents and regularly speaks at industry conferences.",
-    authorRole: "Senior Construction Consultant",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1541976844346-f18aeac57b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 2,
-    slug: "enhancing-user-experience-in-your-cms",
-    category: "Design",
-    comments: 8,
-    day: "07",
-    month: "May",
-    year: "28",
-    title: "Enhancing User Experience in Your CMS",
-    excerpt: "Learn how to create intuitive interfaces that keep users engaged and coming back for more.",
-    content: `
+        author: "Jackson Pot",
+        authorImage: "https://randomuser.me/api/portraits/men/32.jpg",
+        authorBio: "Jackson is a construction technology expert with over 15 years of experience in innovative building methods and sustainable architecture. He has worked on projects across 5 continents and regularly speaks at industry conferences.",
+        authorRole: "Senior Construction Consultant",
+        readTime: "5 min read",
+        image: "https://images.unsplash.com/photo-1541976844346-f18aeac57b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 2,
+        slug: "enhancing-user-experience-in-your-cms",
+        category: "Design",
+        comments: 8,
+        day: "07",
+        month: "May",
+        year: "28",
+        title: "Enhancing User Experience in Your CMS",
+        excerpt: "Learn how to create intuitive interfaces that keep users engaged and coming back for more.",
+        content: `
       <p>User experience (UX) has become the cornerstone of successful content management systems. In today's digital landscape, an intuitive CMS can make the difference between a thriving online presence and a forgotten website.</p>
       
       <h2>Understanding Your Users</h2>
@@ -60,24 +59,24 @@ export const blogPosts = [
       <h2>User Testing</h2>
       <p>Regular user testing helps identify pain points and areas for improvement. Watch how real users interact with your CMS and use those insights to make data-driven design decisions.</p>
     `,
-    author: "Richard Tea",
-    authorImage: "https://randomuser.me/api/portraits/men/44.jpg",
-    authorBio: "Richard is a UX designer specializing in content management systems. He has helped over 50 companies redesign their CMS interfaces for better user adoption and satisfaction.",
-    authorRole: "UX Design Lead",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 3,
-    slug: "the-relationship-between-cms-and-seo",
-    category: "Development",
-    comments: 4,
-    day: "01",
-    month: "May",
-    year: "29",
-    title: "The Relationship Between CMS and SEO",
-    excerpt: "Understanding how your content management system affects search engine rankings.",
-    content: `
+        author: "Richard Tea",
+        authorImage: "https://randomuser.me/api/portraits/men/44.jpg",
+        authorBio: "Richard is a UX designer specializing in content management systems. He has helped over 50 companies redesign their CMS interfaces for better user adoption and satisfaction.",
+        authorRole: "UX Design Lead",
+        readTime: "4 min read",
+        image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 3,
+        slug: "the-relationship-between-cms-and-seo",
+        category: "Development",
+        comments: 4,
+        day: "01",
+        month: "May",
+        year: "29",
+        title: "The Relationship Between CMS and SEO",
+        excerpt: "Understanding how your content management system affects search engine rankings.",
+        content: `
       <p>Search Engine Optimization (SEO) and your Content Management System (CMS) are intrinsically linked. The platform you choose and how you configure it can significantly impact your visibility in search results.</p>
       
       <h2>Technical SEO Foundations</h2>
@@ -92,24 +91,24 @@ export const blogPosts = [
       <h2>Mobile-Friendliness</h2>
       <p>With Google's mobile-first indexing, your CMS must deliver excellent mobile experiences. Responsive design, touch-friendly interfaces, and fast mobile loading times are essential for SEO success.</p>
     `,
-    author: "Pelican Steve",
-    authorImage: "https://randomuser.me/api/portraits/men/68.jpg",
-    authorBio: "Steve is an SEO specialist and developer with a passion for technical optimization. He has helped numerous sites achieve first-page rankings through strategic CMS implementation.",
-    authorRole: "SEO Technical Lead",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 4,
-    slug: "developing-a-content-strategy-for-your-cms",
-    category: "Strategy",
-    comments: 3,
-    day: "10",
-    month: "May",
-    year: "25",
-    title: "Developing a Content Strategy for Your CMS",
-    excerpt: "A comprehensive guide to planning and executing a winning content strategy.",
-    content: `
+        author: "Pelican Steve",
+        authorImage: "https://randomuser.me/api/portraits/men/68.jpg",
+        authorBio: "Steve is an SEO specialist and developer with a passion for technical optimization. He has helped numerous sites achieve first-page rankings through strategic CMS implementation.",
+        authorRole: "SEO Technical Lead",
+        readTime: "6 min read",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 4,
+        slug: "developing-a-content-strategy-for-your-cms",
+        category: "Strategy",
+        comments: 3,
+        day: "10",
+        month: "May",
+        year: "25",
+        title: "Developing a Content Strategy for Your CMS",
+        excerpt: "A comprehensive guide to planning and executing a winning content strategy.",
+        content: `
       <p>A content strategy is the blueprint for all your content efforts. Without one, you're publishing content randomly without a clear purpose or direction.</p>
       
       <h2>Defining Your Goals</h2>
@@ -124,24 +123,24 @@ export const blogPosts = [
       <h2>Measuring Success</h2>
       <p>Define KPIs that align with your goals. Track metrics like traffic, engagement, conversions, and ROI to understand what's working and what needs adjustment.</p>
     `,
-    author: "Piff Jenkins",
-    authorImage: "https://randomuser.me/api/portraits/men/75.jpg",
-    authorBio: "Piff is a content strategist with over a decade of experience helping brands tell their stories effectively. She believes that great content starts with great strategy.",
-    authorRole: "Content Strategy Director",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 5,
-    slug: "crafting-smart-digital-experiences",
-    category: "Strategy",
-    comments: 8,
-    day: "05",
-    month: "May",
-    year: "26",
-    title: "Crafting Smart Digital Experiences",
-    excerpt: "How to create digital experiences that anticipate and exceed user expectations.",
-    content: `
+        author: "Piff Jenkins",
+        authorImage: "https://randomuser.me/api/portraits/men/75.jpg",
+        authorBio: "Piff is a content strategist with over a decade of experience helping brands tell their stories effectively. She believes that great content starts with great strategy.",
+        authorRole: "Content Strategy Director",
+        readTime: "5 min read",
+        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 5,
+        slug: "crafting-smart-digital-experiences",
+        category: "Strategy",
+        comments: 8,
+        day: "05",
+        month: "May",
+        year: "26",
+        title: "Crafting Smart Digital Experiences",
+        excerpt: "How to create digital experiences that anticipate and exceed user expectations.",
+        content: `
       <p>Smart digital experiences go beyond basic functionality. They anticipate user needs, provide personalized content, and create memorable interactions that keep users coming back.</p>
       
       <h2>Personalization at Scale</h2>
@@ -156,24 +155,24 @@ export const blogPosts = [
       <h2>Continuous Optimization</h2>
       <p>Digital experiences are never finished. Use A/B testing, user feedback, and analytics to continuously refine and improve how users interact with your brand.</p>
     `,
-    author: "Samuel Serif",
-    authorImage: "https://randomuser.me/api/portraits/men/22.jpg",
-    authorBio: "Samuel specializes in digital experience strategy, helping companies create engaging, personalized interactions that drive business results.",
-    authorRole: "Digital Experience Strategist",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 6,
-    slug: "design-develop-dominate",
-    category: "Design",
-    comments: 9,
-    day: "30",
-    month: "May",
-    year: "25",
-    title: "Design, Develop, Dominate",
-    excerpt: "A holistic approach to creating digital products that lead the market.",
-    content: `
+        author: "Samuel Serif",
+        authorImage: "https://randomuser.me/api/portraits/men/22.jpg",
+        authorBio: "Samuel specializes in digital experience strategy, helping companies create engaging, personalized interactions that drive business results.",
+        authorRole: "Digital Experience Strategist",
+        readTime: "7 min read",
+        image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 6,
+        slug: "design-develop-dominate",
+        category: "Design",
+        comments: 9,
+        day: "30",
+        month: "May",
+        year: "25",
+        title: "Design, Develop, Dominate",
+        excerpt: "A holistic approach to creating digital products that lead the market.",
+        content: `
       <p>Market-leading digital products don't happen by accident. They require a holistic approach that integrates design thinking, development excellence, and strategic vision.</p>
       
       <h2>Design-Led Development</h2>
@@ -188,24 +187,24 @@ export const blogPosts = [
       <h2>Launch and Beyond</h2>
       <p>A successful launch is just the beginning. Post-launch support, updates, and feature additions keep your product competitive in a rapidly evolving market.</p>
     `,
-    author: "Ravi O'Leigh",
-    authorImage: "https://randomuser.me/api/portraits/men/56.jpg",
-    authorBio: "Ravi leads product development teams with a focus on user-centered design and technical excellence. His approach has launched multiple award-winning products.",
-    authorRole: "Product Development Director",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 7,
-    slug: "results-driven-marketing",
-    category: "Design",
-    comments: 2,
-    day: "25",
-    month: "May",
-    year: "27",
-    title: "Results-Driven Marketing",
-    excerpt: "Marketing strategies that deliver measurable results and ROI.",
-    content: `
+        author: "Ravi O'Leigh",
+        authorImage: "https://randomuser.me/api/portraits/men/56.jpg",
+        authorBio: "Ravi leads product development teams with a focus on user-centered design and technical excellence. His approach has launched multiple award-winning products.",
+        authorRole: "Product Development Director",
+        readTime: "4 min read",
+        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 7,
+        slug: "results-driven-marketing",
+        category: "Design",
+        comments: 2,
+        day: "25",
+        month: "May",
+        year: "27",
+        title: "Results-Driven Marketing",
+        excerpt: "Marketing strategies that deliver measurable results and ROI.",
+        content: `
       <p>In today's data-rich environment, marketing must be accountable for results. Results-driven marketing focuses on strategies that deliver measurable business impact.</p>
       
       <h2>Data-First Approach</h2>
@@ -220,24 +219,24 @@ export const blogPosts = [
       <h2>ROI Measurement</h2>
       <p>Attribution modeling helps you understand which channels and campaigns deliver the best return on investment, allowing you to allocate budget more effectively.</p>
     `,
-    author: "Alice Johnson",
-    authorImage: "https://randomuser.me/api/portraits/women/44.jpg",
-    authorBio: "Alice is a data-driven marketer who specializes in ROI optimization. She has helped companies increase marketing efficiency by an average of 40%.",
-    authorRole: "Marketing Analytics Director",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1557838923-2985c318be48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 8,
-    slug: "next-level-online-presence",
-    category: "Design",
-    comments: 3,
-    day: "20",
-    month: "May",
-    year: "23",
-    title: "Next-Level Online Presence",
-    excerpt: "Building a digital presence that stands out in a crowded marketplace.",
-    content: `
+        author: "Alice Johnson",
+        authorImage: "https://randomuser.me/api/portraits/women/44.jpg",
+        authorBio: "Alice is a data-driven marketer who specializes in ROI optimization. She has helped companies increase marketing efficiency by an average of 40%.",
+        authorRole: "Marketing Analytics Director",
+        readTime: "5 min read",
+        image: "https://images.unsplash.com/photo-1557838923-2985c318be48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 8,
+        slug: "next-level-online-presence",
+        category: "Design",
+        comments: 3,
+        day: "20",
+        month: "May",
+        year: "23",
+        title: "Next-Level Online Presence",
+        excerpt: "Building a digital presence that stands out in a crowded marketplace.",
+        content: `
       <p>In a crowded digital landscape, a basic website is no longer enough. A next-level online presence requires strategic thinking, compelling content, and technical excellence.</p>
       
       <h2>Brand Differentiation</h2>
@@ -252,24 +251,24 @@ export const blogPosts = [
       <h2>Community Building</h2>
       <p>A strong online presence includes community. Foster engagement through comments, social media interaction, and user-generated content initiatives.</p>
     `,
-    author: "John Smith",
-    authorImage: "https://randomuser.me/api/portraits/men/41.jpg",
-    authorBio: "John has helped over 100 brands transform their digital presence. His holistic approach combines strategy, design, and technology for maximum impact.",
-    authorRole: "Digital Presence Strategist",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 9,
-    slug: "understanding-content-management-systems",
-    category: "Design",
-    comments: 3,
-    day: "15",
-    month: "May",
-    year: "21",
-    title: "Understanding Content Management Systems",
-    excerpt: "A beginner's guide to choosing and using the right CMS for your needs.",
-    content: `
+        author: "John Smith",
+        authorImage: "https://randomuser.me/api/portraits/men/41.jpg",
+        authorBio: "John has helped over 100 brands transform their digital presence. His holistic approach combines strategy, design, and technology for maximum impact.",
+        authorRole: "Digital Presence Strategist",
+        readTime: "6 min read",
+        image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        id: 9,
+        slug: "understanding-content-management-systems",
+        category: "Design",
+        comments: 3,
+        day: "15",
+        month: "May",
+        year: "21",
+        title: "Understanding Content Management Systems",
+        excerpt: "A beginner's guide to choosing and using the right CMS for your needs.",
+        content: `
       <p>A Content Management System (CMS) is the backbone of your digital presence. Understanding what a CMS does and how to choose the right one is essential for online success.</p>
       
       <h2>What is a CMS?</h2>
@@ -284,13 +283,13 @@ export const blogPosts = [
       <h2>Making Your Choice</h2>
       <p>Consider your technical resources, budget, content needs, and future plans when selecting a CMS. The right choice will empower your team and support your digital strategy for years to come.</p>
     `,
-    author: "Jane Doe",
-    authorImage: "https://randomuser.me/api/portraits/women/63.jpg",
-    authorBio: "Jane is a CMS specialist who helps organizations select and implement the right content management solutions for their unique needs.",
-    authorRole: "CMS Consultant",
-    readTime: "3 min read",
-    image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-  }
+        author: "Jane Doe",
+        authorImage: "https://randomuser.me/api/portraits/women/63.jpg",
+        authorBio: "Jane is a CMS specialist who helps organizations select and implement the right content management solutions for their unique needs.",
+        authorRole: "CMS Consultant",
+        readTime: "3 min read",
+        image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    }
 ];
 
 export const categories = ["All", "Marketing", "Design", "Development", "Strategy", "Technology"];

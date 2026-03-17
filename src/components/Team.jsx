@@ -1,7 +1,4 @@
-// components/Team.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -62,42 +59,51 @@ export default function Team() {
       });
 
       // Badge animation (like About section)
-      tl.fromTo(badgeRef.current,
-        { y: -30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
-      );
+      if (badgeRef.current) {
+        tl.fromTo(badgeRef.current,
+          { y: -30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        );
+      }
 
       // Title animation (like About section)
-      tl.fromTo(titleRef.current,
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9, ease: "power4.out" },
-        "-=0.4"
-      );
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current,
+          { y: 40, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.9, ease: "power4.out" },
+          "-=0.4"
+        );
+      }
 
       // Subtitle animation
-      tl.fromTo(subtitleRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.4"
-      );
+      if (subtitleRef.current) {
+        tl.fromTo(subtitleRef.current,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.4"
+        );
+      }
 
       // Cards stagger animation
-      tl.fromTo(cardsRef.current,
-        {
-          y: 60,
-          opacity: 0,
-          scale: 0.95
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power3.out"
-        },
-        "-=0.2"
-      );
+      const validCards = cardsRef.current.filter(Boolean);
+      if (validCards.length > 0) {
+        tl.fromTo(validCards,
+          {
+            y: 60,
+            opacity: 0,
+            scale: 0.95
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out"
+          },
+          "-=0.2"
+        );
+      }
 
       // Floating animation for badge
       gsap.to(badgeRef.current, {
@@ -173,13 +179,10 @@ export default function Team() {
             >
               {/* Image Container */}
               <div className="relative w-full h-[400px] overflow-hidden rounded-2xl border border-gray-800 transition-all duration-500 group-hover:border-gray-600 group-hover:shadow-2xl">
-                <Image
+                <img
                   src={member.image}
                   alt={member.name}
-                  fill
-                  className="object-cover transition-all duration-700 group-hover:scale-110"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  priority={index === 0}
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                 />
 
                 {/* Gradient Overlay */}

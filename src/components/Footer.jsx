@@ -1,8 +1,5 @@
-// components/Footer.jsx
-"use client";
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Mail, Phone, MapPin, Send, Sparkles } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -20,8 +17,9 @@ export default function Footer() {
   const bigLogoRef = useRef(null);
   const privacyLinksRef = useRef(null);
   const currentYear = new Date().getFullYear();
-  const pathname = usePathname();
-  const router = useRouter();
+  const location = useLocation();
+  const pathname = location.pathname;
+  const navigate = useNavigate();
 
   const [mounted, setMounted] = useState(false);
 
@@ -39,8 +37,12 @@ export default function Footer() {
       privacyLinksRef.current,
     ].filter(Boolean);
 
-    gsap.set(revealTargets, { opacity: 0, y: 35 });
-    gsap.set(bigLogoRef.current, { opacity: 0, y: 20 });
+    if (revealTargets.length > 0) {
+      gsap.set(revealTargets, { opacity: 0, y: 35 });
+    }
+    if (bigLogoRef.current) {
+      gsap.set(bigLogoRef.current, { opacity: 0, y: 20 });
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -55,13 +57,15 @@ export default function Footer() {
               ease: "power3.out",
             });
             // Big logo fades in last
-            gsap.to(bigLogoRef.current, {
-              opacity: 1,
-              y: 0,
-              duration: 1.2,
-              delay: 0.4,
-              ease: "power4.out",
-            });
+            if (bigLogoRef.current) {
+              gsap.to(bigLogoRef.current, {
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                delay: 0.4,
+                ease: "power4.out",
+              });
+            }
             // Ambient sparkle pulse
             gsap.to(".sparkle-icon", {
               scale: 1.1,
@@ -73,14 +77,16 @@ export default function Footer() {
               delay: 0.8,
             });
             // Ambient logo pulse
-            gsap.to(bigLogoRef.current, {
-              scale: 1.03,
-              duration: 4,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-              delay: 1.5,
-            });
+            if (bigLogoRef.current) {
+              gsap.to(bigLogoRef.current, {
+                scale: 1.03,
+                duration: 4,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: 1.5,
+              });
+            }
             observer.disconnect();
           }
         });
@@ -119,7 +125,7 @@ export default function Footer() {
       }, 100);
     } else {
       // Navigate to services page with hash
-      router.push(`/services#${serviceId}`);
+      navigate(`/services#${serviceId}`);
     }
   };
 
@@ -289,7 +295,7 @@ export default function Footer() {
                 ].map((item) => (
                   <li key={item.name}>
                     <Link
-                      href={item.href}
+                      to={item.href}
                       onMouseEnter={handleLinkEnter}
                       onMouseLeave={handleLinkLeave}
                       className="footer-link font-['Manrope'] text-gray-400 hover:text-white transition-colors duration-300 text-sm inline-block"
@@ -328,7 +334,7 @@ export default function Footer() {
                 {industries.map((industry) => (
                   <li key={industry.name}>
                     <Link
-                      href={industry.href}
+                      to={industry.href}
                       onMouseEnter={handleLinkEnter}
                       onMouseLeave={handleLinkLeave}
                       className="footer-link font-['Manrope'] text-gray-400 hover:text-white transition-colors duration-300 text-sm inline-block"
@@ -391,7 +397,7 @@ export default function Footer() {
                 className="flex items-center gap-6"
               >
                 <Link
-                  href="/privacy"
+                  to="/privacy"
                   onMouseEnter={handleLinkEnter}
                   onMouseLeave={handleLinkLeave}
                   className="footer-link font-['Manrope'] text-xs text-gray-400 hover:text-white transition-colors duration-300 pointer-events-auto"
@@ -399,7 +405,7 @@ export default function Footer() {
                   Privacy
                 </Link>
                 <Link
-                  href="/terms"
+                  to="/terms"
                   onMouseEnter={handleLinkEnter}
                   onMouseLeave={handleLinkLeave}
                   className="footer-link font-['Manrope'] text-xs text-gray-400 hover:text-white transition-colors duration-300 pointer-events-auto"
@@ -407,7 +413,7 @@ export default function Footer() {
                   Terms
                 </Link>
                 <Link
-                  href="/sitemap"
+                  to="/sitemap"
                   onMouseEnter={handleLinkEnter}
                   onMouseLeave={handleLinkLeave}
                   className="footer-link font-['Manrope'] text-xs text-gray-400 hover:text-white transition-colors duration-300 pointer-events-auto"
