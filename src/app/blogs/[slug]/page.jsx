@@ -8,7 +8,7 @@ import { ArrowLeft, Calendar, MessageCircle, Clock, Twitter, Facebook, Linkedin,
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "@/components/Navbar";
-import { blogPosts } from "@/app/data/blogData"; // Import shared data
+import { blogPosts } from "@/app/data/blogData"; 
 
 gsap.registerPlugin(ScrollTrigger);
 
